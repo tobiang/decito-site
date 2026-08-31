@@ -1,0 +1,224 @@
+<!doctype html>
+<!-- DESIGN.md -->
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="Decito — die geteilte Liste, auf der sich ein Haushalt einigt."
+    />
+    <title>Decito</title>
+    <script>
+      (() => {
+        const nav = performance.getEntriesByType("navigation")[0];
+        const back =
+          (window.navigation && navigation.activation
+            ? navigation.activation.navigationType === "traverse"
+            : false) ||
+          (nav && nav.type === "back_forward");
+        if (back) document.documentElement.classList.add("no-intro");
+      })();
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="home">
+    <main>
+      <h1>Decito</h1>
+
+      <svg
+        class="sig"
+        viewBox="0 0 320 9.8"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          class="s1"
+          d="M0.0,2.2 Q5.1,2.2 10.2,2.32 Q15.3,2.32 20.5,2.41 Q25.6,2.41 30.7,2.76 Q35.9,2.76 41.0,3.0 Q46.1,3.0 51.2,3.23 Q56.3,3.23 61.4,3.42 Q66.5,3.42 71.7,3.66 Q76.8,3.66 81.9,4.18 Q87.1,4.18 92.2,4.51 Q97.3,4.51 102.4,4.37 Q107.5,4.37 112.6,4.67 Q117.8,4.67 122.9,5.21 Q128.0,5.21 133.1,4.91 Q138.2,4.91 143.4,5.56 Q148.5,5.56 153.6,4.91 Q158.7,4.91 163.8,5.93 Q168.9,5.93 174.1,5.37 Q179.2,5.37 184.3,5.74 Q189.4,5.74 194.6,5.59 Q199.7,5.59 204.8,5.78 Q209.9,5.78 215.0,6.07 Q220.2,6.07 225.3,5.8 Q230.4,5.8 235.5,6.45 Q240.7,6.45 245.8,6.8 Q250.9,6.8 256.0,6.48 Q261.1,6.48 266.2,6.81 Q271.4,6.81 276.5,6.71 Q281.6,6.71 286.7,6.71 Q291.9,6.71 297.0,7.08 Q302.1,7.08 307.2,7.2"
+          pathLength="100"
+        />
+        <path
+          class="s2"
+          d="M35.2,7.6 Q40.0,7.6 44.7,7.62 Q49.5,7.62 54.2,7.4 Q59.0,7.4 63.7,7.36 Q68.5,7.36 73.2,6.98 Q78.0,6.98 82.7,7.05 Q87.5,7.05 92.2,7.02 Q97.0,7.02 101.7,6.58 Q106.4,6.58 111.1,6.21 Q115.8,6.21 120.6,6.43 Q125.3,6.43 130.1,6.0 Q134.8,6.0 139.6,5.84 Q144.3,5.84 149.1,5.66 Q153.8,5.66 158.6,5.64 Q163.3,5.64 168.1,4.57 Q172.8,4.57 177.6,4.48 Q182.3,4.48 187.1,4.83 Q191.8,4.83 196.6,4.51 Q201.3,4.51 206.1,4.61 Q210.8,4.61 215.6,4.09 Q220.3,4.09 225.1,4.22 Q229.8,4.22 234.6,3.58 Q239.3,3.58 244.1,3.52 Q248.8,3.52 253.5,3.25 Q258.2,3.25 263.0,3.18 Q267.8,3.18 272.5,2.71 Q277.2,2.71 282.0,3.02 Q286.8,3.02 291.5,2.93 Q296.2,2.93 301.0,2.57 Q305.8,2.57 310.5,2.45 Q315.2,2.45 320.0,2.6"
+          pathLength="100"
+        />
+        <path
+          class="s3"
+          d="M12.8,5.0 Q17.5,5.0 22.1,4.97 Q26.8,4.97 31.4,4.78 Q36.0,4.78 40.6,4.84 Q45.2,4.84 49.9,5.01 Q54.5,5.01 59.2,4.83 Q63.9,4.83 68.5,4.37 Q73.2,4.37 77.8,4.63 Q82.4,4.63 87.0,4.94 Q91.7,4.94 96.3,4.91 Q100.9,4.91 105.6,4.81 Q110.2,4.81 114.9,4.9 Q119.6,4.9 124.2,4.72 Q128.8,4.72 133.4,4.65 Q138.1,4.65 142.7,4.46 Q147.3,4.46 152.0,4.56 Q156.7,4.56 161.3,5.12 Q165.9,5.12 170.6,4.54 Q175.2,4.54 179.8,5.12 Q184.4,5.12 189.1,4.74 Q193.8,4.74 198.4,5.53 Q203.1,5.53 207.7,5.39 Q212.3,5.39 217.0,5.11 Q221.6,5.11 226.2,5.32 Q230.8,5.32 235.5,5.3 Q240.2,5.3 244.8,5.78 Q249.4,5.78 254.1,5.81 Q258.8,5.81 263.4,5.45 Q268.0,5.45 272.6,5.59 Q277.2,5.59 281.9,5.57 Q286.5,5.57 291.2,5.4"
+          pathLength="100"
+        />
+        <path
+          class="again a1"
+          d="M0.0,2.2 Q5.1,2.2 10.2,2.32 Q15.3,2.32 20.5,2.41 Q25.6,2.41 30.7,2.76 Q35.9,2.76 41.0,3.0 Q46.1,3.0 51.2,3.23 Q56.3,3.23 61.4,3.42 Q66.5,3.42 71.7,3.66 Q76.8,3.66 81.9,4.18 Q87.1,4.18 92.2,4.51 Q97.3,4.51 102.4,4.37 Q107.5,4.37 112.6,4.67 Q117.8,4.67 122.9,5.21 Q128.0,5.21 133.1,4.91 Q138.2,4.91 143.4,5.56 Q148.5,5.56 153.6,4.91 Q158.7,4.91 163.8,5.93 Q168.9,5.93 174.1,5.37 Q179.2,5.37 184.3,5.74 Q189.4,5.74 194.6,5.59 Q199.7,5.59 204.8,5.78 Q209.9,5.78 215.0,6.07 Q220.2,6.07 225.3,5.8 Q230.4,5.8 235.5,6.45 Q240.7,6.45 245.8,6.8 Q250.9,6.8 256.0,6.48 Q261.1,6.48 266.2,6.81 Q271.4,6.81 276.5,6.71 Q281.6,6.71 286.7,6.71 Q291.9,6.71 297.0,7.08 Q302.1,7.08 307.2,7.2"
+          pathLength="100"
+        />
+        <path
+          class="again a2"
+          d="M35.2,7.6 Q40.0,7.6 44.7,7.62 Q49.5,7.62 54.2,7.4 Q59.0,7.4 63.7,7.36 Q68.5,7.36 73.2,6.98 Q78.0,6.98 82.7,7.05 Q87.5,7.05 92.2,7.02 Q97.0,7.02 101.7,6.58 Q106.4,6.58 111.1,6.21 Q115.8,6.21 120.6,6.43 Q125.3,6.43 130.1,6.0 Q134.8,6.0 139.6,5.84 Q144.3,5.84 149.1,5.66 Q153.8,5.66 158.6,5.64 Q163.3,5.64 168.1,4.57 Q172.8,4.57 177.6,4.48 Q182.3,4.48 187.1,4.83 Q191.8,4.83 196.6,4.51 Q201.3,4.51 206.1,4.61 Q210.8,4.61 215.6,4.09 Q220.3,4.09 225.1,4.22 Q229.8,4.22 234.6,3.58 Q239.3,3.58 244.1,3.52 Q248.8,3.52 253.5,3.25 Q258.2,3.25 263.0,3.18 Q267.8,3.18 272.5,2.71 Q277.2,2.71 282.0,3.02 Q286.8,3.02 291.5,2.93 Q296.2,2.93 301.0,2.57 Q305.8,2.57 310.5,2.45 Q315.2,2.45 320.0,2.6"
+          pathLength="100"
+        />
+        <path
+          class="again a3"
+          d="M12.8,5.0 Q17.5,5.0 22.1,4.97 Q26.8,4.97 31.4,4.78 Q36.0,4.78 40.6,4.84 Q45.2,4.84 49.9,5.01 Q54.5,5.01 59.2,4.83 Q63.9,4.83 68.5,4.37 Q73.2,4.37 77.8,4.63 Q82.4,4.63 87.0,4.94 Q91.7,4.94 96.3,4.91 Q100.9,4.91 105.6,4.81 Q110.2,4.81 114.9,4.9 Q119.6,4.9 124.2,4.72 Q128.8,4.72 133.4,4.65 Q138.1,4.65 142.7,4.46 Q147.3,4.46 152.0,4.56 Q156.7,4.56 161.3,5.12 Q165.9,5.12 170.6,4.54 Q175.2,4.54 179.8,5.12 Q184.4,5.12 189.1,4.74 Q193.8,4.74 198.4,5.53 Q203.1,5.53 207.7,5.39 Q212.3,5.39 217.0,5.11 Q221.6,5.11 226.2,5.32 Q230.8,5.32 235.5,5.3 Q240.2,5.3 244.8,5.78 Q249.4,5.78 254.1,5.81 Q258.8,5.81 263.4,5.45 Q268.0,5.45 272.6,5.59 Q277.2,5.59 281.9,5.57 Q286.5,5.57 291.2,5.4"
+          pathLength="100"
+        />
+      </svg>
+
+      <p class="source">Decide together.</p>
+
+      <div class="pick">
+        <input class="vh" type="radio" name="wahl" id="w1" />
+        <input class="vh" type="radio" name="wahl" id="w2" />
+        <p class="lede">
+          <label for="w1"
+            >Was koche ich?<span class="mark" aria-hidden="true"></span
+          ></label>
+          <label for="w2"
+            >Was schauen wir?<span class="mark" aria-hidden="true"></span
+          ></label>
+        </p>
+      </div>
+      <p class="claim">
+        Decito ist die geteilte Liste, auf der sich ein Haushalt einigt.
+      </p>
+
+      <footer>
+        <p class="state">Bald verfügbar.</p>
+        <p class="legal">
+          <a href="de/privacy/">Datenschutzerklärung</a>
+          <span aria-hidden="true">·</span>
+          <a href="de/terms/">Nutzungsbedingungen</a>
+          <span aria-hidden="true">·</span>
+          <a href="de/contact/">Kontakt</a>
+        </p>
+      </footer>
+    </main>
+
+    <script>
+      (() => {
+        const fine = matchMedia("(hover: hover) and (pointer: fine)");
+        const still = matchMedia("(prefers-reduced-motion: reduce)");
+        if (!fine.matches || still.matches) return;
+
+        const NS = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(NS, "svg");
+        svg.setAttribute("class", "trail");
+        svg.setAttribute("aria-hidden", "true");
+
+        // ONE filled path, not a chain of strokes. Per-segment strokes cannot
+        // taper: each carries its own width, and at every joint the wider
+        // one's round cap protrudes past the narrower — a bead at each point,
+        // at any speed. A ribbon has no caps and no joints, so it has no
+        // beads, and its width can go to zero at the tail, which is what
+        // "the ink lifts" actually looks like.
+        const MAXW = 3.4,
+          LIFE = 420;
+        const path = document.createElementNS(NS, "path");
+        svg.appendChild(path);
+        document.body.appendChild(svg);
+        document.documentElement.classList.add("ink");
+
+        const pts = [];
+        let raf = 0;
+
+        // Where the pen writes is decided by CSS, not by a second list here.
+        // The nib cursor is already scoped to the paper — over words it hands
+        // back the I-beam, over links the pointer — so the ink simply asks
+        // what cursor this element got. One rule, no drift.
+        //
+        // Cached per element: getComputedStyle on every pointermove would be
+        // wasteful, and the answer only changes when the target does.
+        let lastEl = null,
+          onPaper = false;
+        const paper = (el) => {
+          if (el !== lastEl) {
+            lastEl = el;
+            onPaper = getComputedStyle(el).cursor.startsWith("url(");
+          }
+          return onPaper;
+        };
+
+        addEventListener(
+          "pointermove",
+          (e) => {
+            if (e.pointerType !== "mouse") return;
+            // No ink over text or links: the stroke would fight the words and
+            // smear across a selection drag. The trail already in flight is
+            // left to fade rather than being cut off.
+            if (!paper(e.target)) return;
+            const last = pts[pts.length - 1];
+            // Minimum spacing, so a stationary pointer does not stack
+            // samples on one spot and bloat the path.
+            if (
+              last &&
+              Math.hypot(e.clientX - last.x, e.clientY - last.y) < 2.5
+            )
+              return;
+            pts.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+            if (pts.length > 40) pts.shift();
+            if (!raf) raf = requestAnimationFrame(draw);
+          },
+          { passive: true },
+        );
+
+        function draw(now) {
+          while (pts.length && now - pts[0].t > LIFE) pts.shift();
+          const n = pts.length;
+          if (n < 2) {
+            path.removeAttribute("d");
+            raf = n ? requestAnimationFrame(draw) : 0;
+            return;
+          }
+
+          // Walk one edge out and the other back. Half-width follows age, so
+          // the ribbon is widest under the cursor and closes to a point where
+          // the ink has dried.
+          const l = [],
+            r = [];
+          for (let i = 0; i < n; i++) {
+            const p = pts[i],
+              a = pts[Math.max(0, i - 1)],
+              b = pts[Math.min(n - 1, i + 1)];
+            let dx = b.x - a.x,
+              dy = b.y - a.y;
+            const len = Math.hypot(dx, dy) || 1;
+            dx /= len;
+            dy /= len;
+            const k = Math.max(0, 1 - (now - p.t) / LIFE);
+            const w = (MAXW * k * k) / 2;
+            l.push([p.x - dy * w, p.y + dx * w]);
+            r.push([p.x + dy * w, p.y - dx * w]);
+          }
+
+          // Curves, not facets. pointermove samples at whatever rate the
+          // pointer moves, so a fast sweep leaves the points far apart and
+          // straight edges between them read as a polygon. Each sample becomes
+          // the control point of a quadratic through the midpoints, which is a
+          // smooth spline with no extra samples to collect.
+          const edge = (q, first) => {
+            let out = `${first ? "M" : "L"}${q[0][0].toFixed(1)},${q[0][1].toFixed(1)}`;
+            for (let i = 1; i < q.length; i++) {
+              const a = q[i - 1],
+                b = q[i];
+              out +=
+                `Q${a[0].toFixed(1)},${a[1].toFixed(1)} ` +
+                `${((a[0] + b[0]) / 2).toFixed(1)},${((a[1] + b[1]) / 2).toFixed(1)}`;
+            }
+            const last = q[q.length - 1];
+            return out + `L${last[0].toFixed(1)},${last[1].toFixed(1)}`;
+          };
+
+          // Out along one edge, back along the other. Both ends close to a
+          // point, so the ribbon needs no caps.
+          path.setAttribute(
+            "d",
+            edge(l, true) + edge(r.slice().reverse(), false) + "Z",
+          );
+
+          raf = requestAnimationFrame(draw);
+        }
+      })();
+    </script>
+  </body>
+</html>

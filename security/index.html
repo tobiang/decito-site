@@ -1,0 +1,155 @@
+<!doctype html>
+<!-- adr-0306 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="How to report a security vulnerability in Decito, and what happens next."
+    />
+    <title>Security – Decito</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../">← Decito</a>
+      <h1>Reporting a vulnerability</h1>
+
+      <p>
+        Decito is built by one person. If you have found a security problem,
+        telling us first — and giving us time to fix it — is genuinely welcome,
+        and this page says what you can expect in return.
+      </p>
+
+      <div class="doc">
+        <h2>How to report</h2>
+        <p>
+          Write to
+          <a
+            href="mailto:hello@splash.green?subject=Security%20report%20(Decito)"
+            >hello@splash.green</a
+          >
+          with the subject „Security report“. Useful things to include: what you
+          found, the steps to reproduce it, what an attacker could do with it,
+          and anything that helps us tell a real finding from scanner noise.
+          Rough notes beat no report — do not wait until you have written it up
+          properly.
+        </p>
+
+        <h2>What you can expect</h2>
+        <p>
+          A human acknowledgement within <strong>5 working days</strong>, and an
+          assessment — is it real, how bad, what happens next — within
+          <strong>14 days</strong>. If a fix is going to take longer than that,
+          you will hear why and roughly when.
+        </p>
+        <p class="meta">
+          These are the honest numbers for a project maintained by one person in
+          their own time, not the numbers a company with an on-call rota would
+          give. If a deadline passes without a word, send a reminder; something
+          has gone wrong at our end.
+        </p>
+
+        <h2>Good-faith research is authorised</h2>
+        <p>
+          Testing that stays inside this policy is
+          <strong>done with our permission</strong>. That matters more in
+          Germany than the phrase suggests: § 202a StGB punishes access that is
+          <em>unbefugt</em> — unauthorised — and this page is the authorisation.
+          Within the rules below:
+        </p>
+        <p>
+          We will not report you, and we will not bring civil claims against you
+          over your research. If someone else raises a complaint about testing
+          that followed this policy, we will say publicly that it was
+          authorised.
+        </p>
+        <p class="meta">
+          What no operator can promise: we can only waive our own rights. We
+          cannot authorise access to other people's accounts or data, we cannot
+          bind our hosting providers, and a public prosecutor is not ours to
+          speak for. Staying inside the rules below is what keeps all of that
+          theoretical.
+        </p>
+
+        <h2>The rules</h2>
+        <p>
+          <strong>Use your own accounts.</strong> Decito lets you create an
+          account in a tap, and a second one to test sharing against. Never test
+          against an account you do not own.
+        </p>
+        <p>
+          <strong>Stop at proof.</strong> Once you can show a vulnerability
+          exists, stop. Do not read further, do not enumerate, do not download,
+          do not pivot. A screenshot of one record you were not supposed to see
+          proves the point; a dump of the table does not prove it better.
+        </p>
+        <p>
+          <strong
+            >If you reach someone's personal data, that is the end of the
+            test.</strong
+          >
+          Tell us what you saw and delete your copy. Keeping it would make you a
+          controller of data you have no basis to hold, and would turn our
+          incident into yours as well.
+        </p>
+        <p>
+          <strong>Do not degrade the service.</strong> No denial of service, no
+          load or stress testing, no automated scanning that generates real
+          traffic, no spam through any form the app can send.
+        </p>
+        <p>
+          <strong>Attack the software, not the people.</strong> No phishing, no
+          social engineering of us or of anyone using Decito, no physical access
+          attempts.
+        </p>
+
+        <h2>In scope</h2>
+        <p>
+          The Decito apps for <strong>Android and iOS</strong>, this website,
+          and the backend they talk to — the API, the database's access rules,
+          and the stored images. Both apps speak to the same backend, so a
+          finding in one is usually a finding in both; say which you tested on,
+          and we will check the other. Authorisation flaws are the most
+          interesting class here: Decito's lists are shared, so „can one member
+          see or change something they should not" is the question the whole
+          permission model exists to answer.
+        </p>
+
+        <h2>Out of scope</h2>
+        <p>
+          Findings in the services Decito is built on rather than in Decito —
+          Supabase, Google Play, the App Store, the e-mail provider — belong to
+          their own programmes; report them there. Also out of scope: missing
+          hardening headers with no exploit behind them, results from automated
+          scanners that nobody has verified by hand, reports that an old version
+          of a library is old without a path to exploiting it, and anything that
+          needs a rooted or jailbroken device, or an attacker who already
+          controls the phone.
+        </p>
+
+        <h2>Publishing</h2>
+        <p>
+          Please give us <strong>90 days</strong> from your report before making
+          it public. If a fix ships sooner, you are free to publish as soon as
+          it is out. If we go quiet, or if the 90 days pass without a fix, you
+          are free to publish then too — a disclosure deadline is what stops
+          coordinated disclosure from becoming indefinite silence.
+        </p>
+        <p>
+          Tell us if you would like to be credited, and how you want to be
+          named. There is no bounty: Decito is free, has no revenue, and
+          promising money we do not have would be worse than saying so plainly.
+        </p>
+
+        <p class="meta">
+          Last updated: 2026-08-31. Machine-readable contact details, per RFC
+          9116:
+          <a href="../.well-known/security.txt">/.well-known/security.txt</a>.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

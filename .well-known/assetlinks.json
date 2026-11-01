@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.decito",
+      "sha256_cert_fingerprints": [
+        "AD:11:DF:41:7C:04:AE:A0:57:F5:10:43:32:50:70:6C:42:63:00:B9:51:BC:97:AF:13:CF:7D:5E:1F:3A:02:FD"
+      ]
+    }
+  }
+]

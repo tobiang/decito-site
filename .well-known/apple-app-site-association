@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["JQB82M5786.app.decito"],
+        "components": [{ "/": "/go" }, { "/": "/go/" }]
+      }
+    ]
+  }
+}

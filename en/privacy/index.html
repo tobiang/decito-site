@@ -23,7 +23,7 @@
           >Datenschutzerklärung</a
         >.
       </p>
-      <p class="meta">Last updated: November 17, 2026</p>
+      <p class="meta">Last updated: November 21, 2026</p>
 
       <div class="doc">
         <h2 id="verantwortlicher">Controller</h2>
@@ -68,31 +68,40 @@
           necessary data, which GitHub stores in server logs — in particular
           your <strong>IP address</strong>, date and time, the requested address
           and browser and system identifiers. I have no access to this and do
-          not evaluate any of it.
+          not evaluate any of it. GitHub decides itself what it uses these logs
+          for (for example the security of its service), how long it keeps them
+          and whether they go to the USA; I am not involved.
+          <a
+            href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+            >GitHub’s privacy statement</a
+          >
+          has the details.
         </p>
         <p>
           The website sets <strong>no cookies</strong>, embeds no third-party
-          fonts, maps or videos, and loads nothing from any other server. For
-          the transfer to the USA, GitHub relies on the EU Standard Contractual
-          Clauses under Art. 46 GDPR.
+          fonts, maps or videos, and loads nothing from any other server.
         </p>
         <p>
-          Legal basis: Art. 6(1)(f) GDPR — the legitimate interest in being able
-          to serve the pages at all and keep them stable.
+          Legal basis for serving the pages through GitHub: Art. 6(1)(f) GDPR —
+          the legitimate interest in being able to serve them at all and keep
+          them stable.
         </p>
 
         <h2 id="konto">Account and sign-in</h2>
         <p>
           You can use Decito <strong>without an email address</strong>: in that
-          case, an account is created that consists only of a random identifier.
-          If you sign in via magic link, your <strong>email address</strong> is
-          stored as well. You also choose a <strong>display name</strong>; the
-          app asks for it once on first launch, because otherwise nobody in a
-          shared list would know who a contribution came from. What you enter
-          there is up to you — a first name is enough, as is a nickname; it does
-          not have to be your name. The app also transmits your device’s
-          <strong>time zone offset</strong>, so that “today” is your calendar
-          day and not the server’s.
+          case, an account is created that consists of nothing more than a
+          random identifier and a code that, in the app, only you see (see
+          <a href="#rechte">Your rights</a>). If you sign in via magic link,
+          your <strong>email address</strong> is stored as well. You also choose
+          a <strong>display name</strong>; the app asks for it once on first
+          launch, because otherwise nobody in a shared list would know who a
+          contribution came from. What you enter there is up to you — a first
+          name is enough, as is a nickname; it does not have to be your name.
+          The app also transmits your device’s <strong>time zone</strong> — its
+          name, such as “Europe/Berlin”, and its offset from UTC —, so that
+          “today” is your calendar day and not the server’s, across a
+          daylight-saving change too.
         </p>
         <p>
           Optionally, you can give your profile a <strong>color</strong> and a
@@ -130,25 +139,55 @@
           has not been used for <strong>two years</strong> is deleted together
           with its contents.
           <strong>Every launch of the app resets this period</strong>, as soon
-          as the app reaches the server in doing so — opening it is enough. For
-          this purpose, for accounts without an email address I store when the
-          app was last opened (to the nearest half day); for accounts with an
-          email address, this is not recorded. The app reminds you in good time
-          and several times beforehand, and consistently offers to add and
-          confirm an email address; after that, the period no longer applies.
+          as the app reaches the server in doing so — opening it is enough. So
+          does ticking off or postponing an entry from the home screen widget or
+          from a notification. For this purpose, I store when the account was
+          last used this way (to the nearest half day). The app reminds you in
+          good time and several times beforehand, and consistently offers to add
+          and confirm an email address; after that, the period no longer
+          applies, and the time is no longer updated — the last one stored
+          remains.
         </p>
         <p>
           Legal basis: Art. 6(1)(b) GDPR (provision of the features you
           request).
         </p>
+        <p>
+          If you do not agree to changed
+          <a href="../terms/#aenderungen">terms of use</a>, I keep your account
+          and your content, so that you can agree later and carry on, and the
+          members of your shared lists keep their content. Legal basis: Art.
+          6(1)(f) GDPR.
+        </p>
+        <p>
+          As with any online service, Supabase (see
+          <a href="#empfaenger">Recipients</a>) learns your device’s
+          <strong>IP address</strong>, the program’s identifier and the time
+          with every connection the app makes to the server, and records them in
+          its access logs. For each sign-in session, Supabase also stores the
+          device’s IP address and program identifier for as long as the session
+          exists. I do not evaluate any of this; it serves operation and the
+          detection of abuse. Legal basis: Art. 6(1)(f) GDPR — the legitimate
+          interest in running the service securely and stably.
+        </p>
 
         <h2 id="inhalte">Content you create</h2>
         <p>
-          Everything you record in a list is stored — currently, for example,
-          entries, notes, tags, dates, ratings, polls and uploaded images. This
-          content is visible to the members of the respective list — that is the
-          purpose of the app. Anyone who shares a list with you sees the
-          associated contributions and your display name.
+          Everything you record in a list (in the app: a collection) is stored —
+          currently, for example, entries, notes, tags, dates, ratings, polls
+          and uploaded images. This content is visible to the members of the
+          respective list — that is the purpose of the app. Anyone who shares a
+          list with you sees the associated contributions and your display name.
+          In a running poll, members see who has finished and whom the poll is
+          still waiting for. Nobody sees how the others rated while the poll
+          runs;
+          <strong
+            >once it ends, every member of the list sees who rated how</strong
+          >
+          — including those who did not vote themselves. If you choose “Count me
+          out” or switch off “Count me in polls” in a list, that is stored; only
+          you can see it, the others merely see that the poll is not waiting for
+          you.
         </p>
         <p>
           What you write in a free text field or upload as an image is your
@@ -161,10 +200,11 @@
 
         <h2 id="nutzung">How you use the app</h2>
         <p>
-          I store when an entry was completed or reopened and how you responded
-          to suggestions. Like the rest of your content, this data is held at
-          Supabase (see <a href="#empfaenger">Recipients</a>). The app computes
-          the recommendations and statistics from it on your device, and does so
+          I store when an entry was completed — if you undo it right away, the
+          record disappears again — and how you responded to suggestions. Like
+          the rest of your content, this data is held at Supabase (see
+          <a href="#empfaenger">Recipients</a>). The app computes the
+          recommendations and statistics from it on your device, and does so
           <strong>within your own lists</strong>: they are not combined with
           other services, not linked into a profile across lists and do not
           serve any advertising. In a shared list, your yes and no responses to
@@ -189,7 +229,11 @@
           as one line with a “Thanks”, never as a count or a ranking. For this,
           I also store who planned an entry and who filled an entry in — a
           photo, a link or a few words —, each with the hour, but not what was
-          changed. Members of the list can see this.
+          changed. So that covering for someone counts too: if you take over an
+          entry that was assigned to another member, I store whom it was
+          assigned to before and when you took it over; and for each completed
+          entry, whose task it was at the time. Members of the list can see
+          this.
         </p>
         <p>
           Only on your device, the app keeps for this which thank-yous you have
@@ -198,9 +242,9 @@
         </p>
         <p>
           Legal basis: for a thank-you, Art. 6(1)(b) GDPR; for the line and for
-          who planned or filled in an entry, Art. 6(1)(f) GDPR — the members’
-          legitimate interest in seeing and acknowledging work that would
-          otherwise go unnoticed.
+          who planned, filled in or took over an entry and whose task it was,
+          Art. 6(1)(f) GDPR — the members’ legitimate interest in seeing and
+          acknowledging work that would otherwise go unnoticed.
         </p>
 
         <h2 id="tracking">No tracking across providers</h2>
@@ -220,7 +264,7 @@
           display, and the sign-in session. Personal intentions such as food
           focus and mindful shopping also stay on the device and do not reach
           the server. For tag suggestions, a language model is downloaded once
-          from the provider’s storage (see
+          from the file storage at Supabase (see
           <a href="#empfaenger">Recipients</a>) and then run
           <strong>exclusively on the device</strong>. The suggestion feature can
           be turned off in the settings.
@@ -229,7 +273,8 @@
           If you want to take text from a photo, the app uses your device’s text
           recognition — on Android, that of Google Play services (ML Kit), whose
           recognition model the operating system downloads from Google as
-          needed. The recognition itself runs
+          needed; on iOS, the one Apple ships with the system, for which nothing
+          is downloaded. The recognition itself runs
           <strong>exclusively on the device</strong>, the photo does not leave
           it for this, and none of this happens without your action: the feature
           becomes active only when you invoke it.
@@ -263,13 +308,14 @@
 
         <h2 id="links">Entries with a link</h2>
         <p>
-          If you share a link from another app to Decito, Decito accesses that
-          address <strong>directly from your device</strong> to determine the
-          title and preview image; for IMDb links, it additionally accesses
-          IMDb’s suggestion interface. In doing so, the website accessed learns
-          <strong>your IP address</strong> and the program’s identifier (user
-          agent), just as with any access in a browser. No intermediate server
-          is used, and I receive no data through this.
+          If you share a link from another app to Decito, type one in, or have
+          an entry reloaded from its source, Decito accesses that address
+          <strong>directly from your device</strong> to determine the title and
+          preview image; for IMDb links, it accesses IMDb’s suggestion interface
+          instead of the page. In doing so, the website accessed learns
+          <strong>your IP address</strong> and a generic browser identifier
+          (user agent), just as with any access in a browser. No intermediate
+          server is used, and I receive no data through this.
         </p>
         <p>
           It does not stop at this one access: the preview image and site icon
@@ -281,7 +327,12 @@
           retrieval, the website learns the IP address of the respective device.
           Without an entry with a link, none of this takes place.
         </p>
-        <p>Legal basis: Art. 6(1)(b) GDPR.</p>
+        <p>
+          Legal basis: for the retrieval on your device, Art. 6(1)(b) GDPR; for
+          the retrieval on the other members’ devices, Art. 6(1)(f) GDPR — the
+          interest in showing an image at its source instead of making a copy to
+          which I hold no rights.
+        </p>
 
         <h2 id="karte">The map</h2>
         <p>
@@ -314,7 +365,9 @@
           There is <strong>no push service</strong>, no device identifier for
           notifications and therefore no recipient either: nothing leaves the
           device, and you can revoke the permission at any time in the operating
-          system.
+          system. A timer from a recipe step is handed, on your tap, with its
+          label to your device’s clock, which runs it from then on — this too
+          stays on the device.
         </p>
 
         <h2 id="empfaenger">Recipients</h2>
@@ -340,8 +393,8 @@
             <a href="mailto:hello@splash.green">hello@splash.green</a>, the
             address for access requests, deletion and reports. Processor under
             Art. 28 GDPR; processes what you write to me, including your sender
-            address. Strato AG is based in Berlin and operates its servers in
-            Germany.
+            address, see <a href="#e-mail">When you write to me</a>. Strato AG
+            is based in Berlin and operates its servers in Germany.
           </li>
           <li>
             <strong>Apple or Google</strong> — your operating system’s location
@@ -352,7 +405,13 @@
           </li>
           <li>
             <strong>GitHub</strong> — serving this website, see
-            <a href="#website">This website</a>.
+            <a href="#website">This website</a>; processes the server logs in
+            its own responsibility, not on my behalf.
+          </li>
+          <li>
+            <strong>Courts and authorities</strong> — only if I am legally
+            obliged to hand something over or must report a threat to someone’s
+            life or safety (Art. 18 DSA). Legal basis: Art. 6(1)(c) GDPR.
           </li>
           <li>
             <strong>Your app store provider</strong> — depending on where you
@@ -395,10 +454,12 @@
           obligations for online platforms therefore do not apply.
         </p>
         <p>
-          I store the report, the reported content and the IDs of the reporting
-          and the uploading person; for a report by email, additionally the name
-          and address of the reporting person, which Art. 16(2) DSA requires for
-          an actionable report. In addition, a moderation log is kept for every
+          I store the report, the title and image address of the reported entry
+          and the IDs of the reporting and the uploading person; for a report by
+          email, additionally the name and email address of the reporting
+          person, which Art. 16(2) DSA requires for an actionable report —
+          except for reports about the sexual abuse of children, which can be
+          made without a name. In addition, a moderation log is kept for every
           measure.
         </p>
         <p>
@@ -432,9 +493,9 @@
           With an entry, the following is stored: your text; for an error
           report, the error message and the technical trace (stack trace)
           together with the place in the app last opened; in addition, the app
-          version, processor architecture, time zone, Android version, language
-          setting, device model and the status of the notification permission —
-          as well as your account ID.
+          version, processor architecture, time zone, operating system version,
+          language setting, device model and the status of the notification
+          permission — as well as your account ID.
         </p>
         <p>
           You can see your entries again in the app, together with any response
@@ -443,6 +504,19 @@
           your account is deleted, all your entries disappear. Legal basis: Art.
           6(1)(f) GDPR — legitimate interest in a working product, with the
           transmission always initiated by you.
+        </p>
+
+        <h2 id="e-mail">When you write to me</h2>
+        <p>
+          If you send me an email — about an access request, a deletion or a
+          report, say —, I process it together with your sender address to deal
+          with your request and to be able to show later that I did. Legal
+          basis: Art. 6(1)(c) GDPR insofar as it concerns your rights under the
+          GDPR or a report under the DSA, otherwise Art. 6(1)(f) GDPR — the
+          legitimate interest in being able to reply to you. I delete the
+          correspondence at the end of the third year after the year in which
+          the matter was closed — until then, claims arising from it could still
+          be made (§§ 195, 199 BGB).
         </p>
 
         <h2 id="dauer">Retention period</h2>
@@ -456,8 +530,8 @@
             it, at the latest two years after last use.
           </li>
           <li>
-            Content in shared lists: contributions that other members continue
-            to use may remain in their lists.
+            Content in shared lists: what you added there stays in the list
+            after your account is deleted, without your name.
           </li>
           <li>Reports about content: three years from receipt.</li>
           <li>
@@ -476,9 +550,23 @@
             you.
           </li>
           <li>
+            Whom a taken-over entry was assigned to before: until it is assigned
+            anew; whose task it was when completed: eight days. When your
+            account is deleted, both lose their link to you.
+          </li>
+          <li>
             Local data on the device: until uninstallation or until you clear
             the app’s storage; the names of the upcoming days also as soon as
             you sign out.
+          </li>
+          <li>
+            Access logs at Supabase: according to Supabase’s retention periods;
+            a sign-in session including its IP address, for as long as it
+            exists, at most until your account is deleted.
+          </li>
+          <li>
+            Emails to me: until the end of the third year after the year in
+            which the matter was closed.
           </li>
           <li>
             Server logs of this website: according to GitHub’s retention
@@ -488,22 +576,29 @@
 
         <h2 id="loeschen">Deleting your account</h2>
         <p>
-          You can delete your account yourself in the app under “Settings”. The
+          You can delete your account yourself in the app under “Account” (the
+          person icon at the top of the home screen); image files from lists
+          deleted along with it are gone by the following day at the latest. The
           account, profile and your content are removed — with the exception of
           the records described under
-          <a href="#moderation">Reports and moderation</a>. Contributions in
-          other people’s shared lists remain in those lists but lose any link to
-          you; the same applies to completion, planning and reaction data
-          already recorded there. Thank-yous you gave or received, and the
-          record of which entries you filled in, are deleted.
+          <a href="#moderation">Reports and moderation</a>. What you added to
+          shared lists — including your own lists that pass to a member — stays
+          in those lists and is shown there without your name, because the other
+          members keep planning with it (Art. 6(1)(f) GDPR). The same applies to
+          completion, planning and poll data already recorded there. If a photo
+          or text shows you yourself and should go, delete it beforehand or
+          write to me, and I will delete it. Thank-yous you gave or received,
+          the record of which entries you filled in, and your verdicts on
+          entries (stars and remark) are deleted, including in other people’s
+          lists.
         </p>
         <p>
           Lists that <strong>belong to you</strong> and still have someone else
           in them pass to the member who has belonged to them the longest — the
           others’ contributions depend on them. Only lists in which there is no
-          one else are deleted along with it. An ongoing poll that would be
-          affected by the deletion is ended in the process; the app tells you
-          this beforehand.
+          one else are deleted along with it. The deletion takes you out of an
+          ongoing poll; the others keep voting, and if only your vote was
+          missing, it ends.
         </p>
         <p>
           The same holds when the two-year period of an account without an email
@@ -540,8 +635,13 @@
 
         <h2 id="alter">Age</h2>
         <p>
-          Decito is not directed at children. Anyone under the age of 16 needs
-          the consent of their parents or legal guardians to use it.
+          Anyone aged 13 or over may use Decito; anyone not yet 18 needs the
+          consent of their parents or other legal representatives. I do not
+          check anyone’s age. If I learn that someone is younger than 13 or that
+          their parents do not consent, I delete the account — parents can write
+          to me informally at
+          <a href="mailto:hello@splash.green">hello@splash.green</a>. Nothing in
+          Decito is public: a list is seen only by those invited to it.
         </p>
 
         <h2 id="rechte">Your rights</h2>
@@ -555,18 +655,38 @@
         </p>
         <p>
           <strong>Right to object (Art. 21 GDPR):</strong> Insofar as data is
-          processed on the basis of Art. 6(1)(f) GDPR — the server logs of this
-          website, the moderation log, feedback and error reports, and who
-          planned or filled in an entry —, you may object to this processing at
-          any time on grounds relating to your particular situation.
+          processed on the basis of Art. 6(1)(f) GDPR, you may object at any
+          time on grounds relating to your particular situation. This covers:
+        </p>
+        <ul>
+          <li>serving this website through GitHub;</li>
+          <li>the access logs and sign-in sessions at Supabase;</li>
+          <li>retrieving preview images on the other members’ devices;</li>
+          <li>
+            the “Thanks” line and who planned, filled in or took over an entry
+            and whose task it was;
+          </li>
+          <li>
+            keeping your account if you do not agree to changed terms of use,
+            and your contributions in shared lists after a deletion;
+          </li>
+          <li>keeping reports and the moderation log;</li>
+          <li>feedback and error reports;</li>
+          <li>emails to me.</li>
+        </ul>
+        <p>
+          A short informal email to
+          <a href="mailto:hello@splash.green">hello@splash.green</a> is enough.
         </p>
         <p>
           If you use Decito <strong>without an email address</strong>, I cannot
           identify you without additional information; in that case, Art. 15–20
           GDPR apply only insofar as you provide the missing information (Art.
-          11(2) GDPR). That is the <strong>ID</strong> that the app shows under
-          “Settings → Account” — give it to me, and your request can be
-          answered.
+          11(2) GDPR). That is <strong>this account’s code</strong>, which the
+          app shows under “Account” — give it to me, and your request can be
+          answered. The earlier “ID” that older versions of the app show is no
+          longer enough, because it also reaches the members of your shared
+          lists.
         </p>
         <p>
           You can also lodge a complaint with a supervisory authority, in

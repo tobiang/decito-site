@@ -40,7 +40,10 @@
           App anlegst und tust — etwa was du erledigt oder eingeplant hast —,
           und was der Betrieb technisch erfordert. Ein Fehlerbericht verlässt
           dein Gerät nur, wenn du ihn selbst absendest — siehe
-          <a href="#feedback">Feedback und Fehlerberichte</a>.
+          <a href="#feedback">Feedback und Fehlerberichte</a>. Push-Mitteilungen
+          gibt es nur auf einem Gerät, auf dem du sie einschaltest; Google und
+          Apple erfahren dabei keine Inhalte, nur Kennungen — siehe
+          <a href="#benachrichtigungen">Benachrichtigungen</a>.
         </p>
         <p>
           Diese Erklärung gilt für die <strong>App</strong> und für
@@ -390,13 +393,40 @@
 
         <h2 id="benachrichtigungen">Benachrichtigungen</h2>
         <p>
-          Erinnerungen erzeugt das Gerät selbst aus den Daten, die es ohnehin
-          hat. Es gibt <strong>keinen Push-Dienst</strong>, keine Gerätekennung
-          für Benachrichtigungen und damit auch keinen Empfänger: Es verlässt
-          nichts das Gerät, und du kannst die Erlaubnis jederzeit im
-          Betriebssystem widerrufen. Einen Timer aus einem Rezeptschritt
-          übergibt die App auf deinen Tipp samt Bezeichnung an die Uhr deines
-          Geräts, die ihn von da an führt — auch das bleibt auf dem Gerät.
+          Die Grüße zum Tag und Erinnerungen erzeugt das Gerät selbst aus den
+          Daten, die es ohnehin hat; dafür verlässt nichts das Gerät. Einen
+          Timer aus einem Rezeptschritt übergibt die App auf deinen Tipp samt
+          Bezeichnung an die Uhr deines Geräts, die ihn von da an führt — auch
+          das bleibt auf dem Gerät.
+        </p>
+        <p>
+          <strong>Push-Mitteilungen</strong> — etwa wenn jemand in einer
+          gemeinsamen Liste eine Abstimmung startet — gibt es nur, wenn du sie
+          auf einem Gerät einschaltest. Dann meldet sich dieses Gerät bei
+          Firebase Cloud Messaging von Google an. Dabei entsteht eine
+          Gerätekennung (die Firebase-Installations-ID), die ich zusammen mit
+          deinem Konto und der Anmeldung speichere, unter der du eingeschaltet
+          hast. Eine Mitteilung enthält
+          <strong>keine Inhalte, nur Kennungen</strong>: welche Liste, welche
+          Abstimmung und wer sie gestartet hat, als zufällige IDs, nie als Namen
+          oder Text. Den Text schreibt dein Gerät selbst aus dem, was es schon
+          weiß. Startest du eine Abstimmung, geht deine zufällige Kennung in den
+          Mitteilungen an die anderen mit — auch wenn du selbst keine
+          Push-Mitteilungen eingeschaltet hast. Google und — auf einem iPhone,
+          wohin Google die Mitteilung über Apple zustellt — Apple sehen dabei,
+          welches Gerät wann eine Mitteilung erhält, und dessen IP-Adresse.
+        </p>
+        <p>
+          Bevor du einschaltest, spricht die App mit keinem dieser Dienste. Du
+          schaltest Push-Mitteilungen pro Gerät in den Mitteilungen der App oder
+          im Betriebssystem wieder aus; mit dem Ausschalten, dem Abmelden oder
+          der Löschung deines Kontos lösche ich die Gerätekennung.
+        </p>
+        <p>
+          Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO. Die Kennung auf deinem
+          Gerät zu speichern und auszulesen ist für den Dienst, den du
+          ausdrücklich wünschst, indem du ihn einschaltest, unbedingt
+          erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).
         </p>
 
         <h2 id="empfaenger">Empfänger</h2>
@@ -416,6 +446,28 @@
             E-Mail-Adresse. Der Anbieter Resend, Inc. sitzt in den USA; für die
             Übermittlung gelten die EU-Standardvertragsklauseln nach Art. 46
             DSGVO, die Bestandteil des Auftragsverarbeitungsvertrags sind.
+          </li>
+          <li>
+            <strong>Google</strong> — Firebase Cloud Messaging, Zustellung der
+            Push-Mitteilungen, nur an Geräte, auf denen du sie eingeschaltet
+            hast, siehe <a href="#benachrichtigungen">Benachrichtigungen</a>.
+            Auftragsverarbeiter nach Art. 28 DSGVO; verarbeitet die
+            Gerätekennung, den Zeitpunkt und die Kennungen einer Mitteilung, nie
+            ihren Text. Vertragspartner ist die Google LLC, USA. Die
+            Übermittlung stützt sich auf den Angemessenheitsbeschluss zum EU-US
+            Data Privacy Framework (Art. 45 DSGVO), dem die Google LLC
+            beigetreten ist; ergänzend gelten die EU-Standardvertragsklauseln
+            (Art. 46 DSGVO) aus den Datenverarbeitungsbedingungen von Firebase.
+            Bei Google bleibt die Gerätekennung, bis die App sie dort abmeldet;
+            danach löscht Google sie nach eigenen Angaben binnen 180 Tagen.
+          </li>
+          <li>
+            <strong>Apple</strong> — der Push-Dienst der Apple Distribution
+            International Ltd., Irland (APNs), über den Google eine
+            Push-Mitteilung auf ein iPhone zustellt. Apple erhält dieselben
+            Kennungen ohne Inhalte und verarbeitet sie als Teil seines
+            Betriebssystems in eigener Verantwortung, nicht in meinem Auftrag;
+            maßgeblich ist die Datenschutzerklärung von Apple.
           </li>
           <li>
             <strong>Strato</strong> — Postfach für
@@ -597,6 +649,19 @@
             sieben Tage, auch über die Löschung deines Kontos hinaus. Eine
             Anmeldesitzung samt IP-Adresse: solange sie besteht, längstens bis
             zur Löschung deines Kontos.
+          </li>
+          <li>
+            Gerätekennung für Push-Mitteilungen: solange sie auf dem Gerät
+            eingeschaltet sind und die Anmeldung besteht, unter der du sie
+            eingeschaltet hast; mit dem Ausschalten, dem Abmelden oder der
+            Löschung deines Kontos sofort. Bei Google bleibt sie, bis die App
+            sie dort abmeldet, danach nach Angaben von Google höchstens 180
+            Tage.
+          </li>
+          <li>
+            Push-Mitteilungen an dich: bis sie zugestellt sind; dass dir eine
+            Abstimmung gemeldet wurde, solange sie läuft, damit die Mitteilung
+            danach zurückgenommen werden kann — sonst längstens 30 Tage.
           </li>
           <li>
             E-Mails an mich: bis zum Ende des dritten Jahres nach dem Jahr, in

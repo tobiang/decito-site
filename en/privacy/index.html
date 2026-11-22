@@ -23,7 +23,7 @@
           >Datenschutzerklärung</a
         >.
       </p>
-      <p class="meta">Last updated: November 21, 2026</p>
+      <p class="meta">Last updated: November 22, 2026</p>
 
       <div class="doc">
         <h2 id="verantwortlicher">Controller</h2>
@@ -70,7 +70,10 @@
           and browser and system identifiers. I have no access to this and do
           not evaluate any of it. GitHub decides itself what it uses these logs
           for (for example the security of its service), how long it keeps them
-          and whether they go to the USA; I am not involved.
+          and whether they go to the USA; I am not involved. GitHub, Inc. is
+          certified under the EU-U.S. Data Privacy Framework, so an adequacy
+          decision of the European Commission covers transfers to it (Art. 45
+          GDPR).
           <a
             href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
             >GitHub’s privacy statement</a
@@ -166,16 +169,20 @@
           with every connection the app makes to the server, and records them in
           its access logs. For each sign-in session, Supabase also stores the
           device’s IP address and program identifier for as long as the session
-          exists. I do not evaluate any of this; it serves operation and the
-          detection of abuse. Legal basis: Art. 6(1)(f) GDPR — the legitimate
-          interest in running the service securely and stably.
+          exists, and records every sign-in, sign-out and session refresh in a
+          sign-in log — for an account with an email address, including that
+          address. I delete the sign-in log after seven days. I do not evaluate
+          any of this; it serves operation and the detection of abuse. Legal
+          basis: Art. 6(1)(f) GDPR — the legitimate interest in running the
+          service securely and stably.
         </p>
 
         <h2 id="inhalte">Content you create</h2>
         <p>
           Everything you record in a list (in the app: a collection) is stored —
           currently, for example, entries, notes, tags, dates, ratings, polls
-          and uploaded images. This content is visible to the members of the
+          and uploaded images. The app removes any location a photo carries
+          before uploading it. This content is visible to the members of the
           respective list — that is the purpose of the app. Anyone who shares a
           list with you sees the associated contributions and your display name.
           In a running poll, members see who has finished and whom the poll is
@@ -560,9 +567,10 @@
             you sign out.
           </li>
           <li>
-            Access logs at Supabase: according to Supabase’s retention periods;
-            a sign-in session including its IP address, for as long as it
-            exists, at most until your account is deleted.
+            Access logs at Supabase: seven days. Sign-in log: seven days, also
+            beyond the deletion of your account. A sign-in session including its
+            IP address: for as long as it exists, at most until your account is
+            deleted.
           </li>
           <li>
             Emails to me: until the end of the third year after the year in

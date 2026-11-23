@@ -16,7 +16,7 @@
     <main>
       <a class="back" href="../../">← Decito</a>
       <h1>Datenschutzerklärung</h1>
-      <p class="meta">Stand: 22. November 2026</p>
+      <p class="meta">Stand: 23. November 2026</p>
 
       <div class="doc">
         <h2 id="verantwortlicher">Verantwortlicher</h2>
@@ -110,10 +110,8 @@
           geteilten Listen neben deinem Namen. Ebenso freiwillig wählst du ein
           <strong>Bundesland</strong>: Es legt fest, welche gesetzlichen
           Feiertage und Schulferien bei „Passende Tage“ in deinen Listen gelten,
-          und mit ihm nennt dir die App auf der Startseite, in „Pläne“ und in
-          den Mitteilungen zum Tag, was für ein Tag ist. Für diese Mitteilungen
-          legt sie die Namen der kommenden Tage und dein Bundesland auf deinem
-          Gerät ab. Gilt ein Feiertag dort nur in einem Teil des Landes,
+          und mit ihm nennt dir die App auf der Startseite und in „Pläne“, was
+          für ein Tag ist. Gilt ein Feiertag dort nur in einem Teil des Landes,
           entscheidest du selbst, ob er für dich zählt — gespeichert wird dann
           nur diese Angabe, nie dein Wohnort. Das Bundesland sehen die
           Mitglieder deiner Listen, denn nach ihm richtet sich, wann Einträge
@@ -393,33 +391,44 @@
 
         <h2 id="benachrichtigungen">Benachrichtigungen</h2>
         <p>
-          Die Grüße zum Tag und Erinnerungen erzeugt das Gerät selbst aus den
-          Daten, die es ohnehin hat; dafür verlässt nichts das Gerät. Einen
+          Die Hinweise, bevor ein ungenutztes Konto ohne E-Mail-Adresse gelöscht
+          wird, erzeugt das Gerät selbst; dafür verlässt nichts das Gerät. Einen
           Timer aus einem Rezeptschritt übergibt die App auf deinen Tipp samt
           Bezeichnung an die Uhr deines Geräts, die ihn von da an führt — auch
           das bleibt auf dem Gerät.
         </p>
         <p>
-          <strong>Push-Mitteilungen</strong> — etwa wenn jemand in einer
-          gemeinsamen Liste eine Abstimmung startet — gibt es nur, wenn du sie
-          auf einem Gerät einschaltest. Dann meldet sich dieses Gerät bei
-          Firebase Cloud Messaging von Google an. Dabei entsteht eine
-          Gerätekennung (die Firebase-Installations-ID), die ich zusammen mit
-          deinem Konto und der Anmeldung speichere, unter der du eingeschaltet
-          hast. Eine Mitteilung enthält
+          <strong>Push-Mitteilungen</strong> — wenn jemand in einer gemeinsamen
+          Liste eine Abstimmung startet, wenn ihr Ergebnis da ist und wenn
+          jemand anderes für heute etwas einplant, tauscht oder streicht — gibt
+          es nur, wenn du sie auf einem Gerät einschaltest. Dann meldet sich
+          dieses Gerät bei Firebase Cloud Messaging von Google an. Dabei
+          entsteht eine Gerätekennung (die Firebase-Installations-ID), die ich
+          zusammen mit deinem Konto, der Anmeldung, unter der du eingeschaltet
+          hast, und den Mitteilungsarten speichere, die deine App-Version
+          anzeigen kann. Eine Mitteilung enthält
           <strong>keine Inhalte, nur Kennungen</strong>: welche Liste, welche
-          Abstimmung und wer sie gestartet hat, als zufällige IDs, nie als Namen
-          oder Text. Den Text schreibt dein Gerät selbst aus dem, was es schon
-          weiß. Startest du eine Abstimmung, geht deine zufällige Kennung in den
-          Mitteilungen an die anderen mit — auch wenn du selbst keine
-          Push-Mitteilungen eingeschaltet hast. Google und — auf einem iPhone,
-          wohin Google die Mitteilung über Apple zustellt — Apple sehen dabei,
-          welches Gerät wann eine Mitteilung erhält, und dessen IP-Adresse.
+          Abstimmung und, beim Start, wer sie gestartet hat, als zufällige IDs,
+          nie als Namen oder Text — auch ein Ergebnis nennt keine Option. Den
+          Text schreibt dein Gerät selbst aus dem, was es schon weiß. Die eine
+          Ausnahme sind die Titel dessen, was für heute geplant ist: Sie reisen
+          <strong>versiegelt</strong> mit. Beim Einschalten erzeugt dein Gerät
+          ein Schlüsselpaar und gibt mir nur den öffentlichen Teil; damit
+          verschlüssele ich die Titel für genau dieses Gerät, und nur sein
+          privater Schlüssel, der das Gerät nie verlässt, kann sie öffnen.
+          Google und Apple befördern sie, lesen können sie sie nicht. Damit ich
+          nur Neues melde, merke ich mir je Liste und Tag, was ich dir zuletzt
+          gemeldet habe, bis zum übernächsten Tag. Startest du eine Abstimmung,
+          geht deine zufällige Kennung in den Mitteilungen an die anderen mit —
+          auch wenn du selbst keine Push-Mitteilungen eingeschaltet hast. Google
+          und — auf einem iPhone, wohin Google die Mitteilung über Apple
+          zustellt — Apple sehen dabei, welches Gerät wann eine Mitteilung
+          erhält, und dessen IP-Adresse.
         </p>
         <p>
           Bevor du einschaltest, spricht die App mit keinem dieser Dienste. Du
-          schaltest Push-Mitteilungen pro Gerät in den Mitteilungen der App oder
-          im Betriebssystem wieder aus; mit dem Ausschalten in der App, dem
+          schaltest Push-Mitteilungen pro Gerät in den Einstellungen der App
+          oder im Betriebssystem wieder aus; mit dem Ausschalten in der App, dem
           Abmelden oder der Löschung deines Kontos lösche ich die Gerätekennung,
           nach dem Ausschalten im Betriebssystem oder einem Abmelden ohne Netz
           beim nächsten Öffnen der App.

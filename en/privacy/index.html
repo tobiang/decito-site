@@ -23,7 +23,7 @@
           >Datenschutzerklärung</a
         >.
       </p>
-      <p class="meta">Last updated: November 23, 2026</p>
+      <p class="meta">Last updated: November 24, 2026</p>
 
       <div class="doc">
         <h2 id="verantwortlicher">Controller</h2>
@@ -255,6 +255,32 @@
           who planned, filled in or took over an entry and whose task it was,
           Art. 6(1)(f) GDPR — the members’ legitimate interest in seeing and
           acknowledging work that would otherwise go unnoticed.
+        </p>
+
+        <h2 id="api">API keys</h2>
+        <p>
+          An Admin or the owner of a list can make an API key, with which a
+          service outside the app — Home Assistant, say — adds items to that one
+          list. For each key I store the list, who made it and who revoked it,
+          its name, when it was made, expires, was revoked and was last used,
+          and what it may do. Of the key itself I store only a hash; no one can
+          show it again afterwards, me included.
+        </p>
+        <p>
+          Every call a key makes is logged with its time, its outcome and the
+          item it touched, so you can see what it did and so that a leaked key
+          is slowed down. The log holds no IP address and no program identifier;
+          Supabase records them, as for any connection, in its access logs (see
+          <a href="#konto">Account and sign-in</a>). Every member of the list
+          sees a key's name, who made it, when, and whether it still works; its
+          expiry, last use and log only Admins and the owner see, because that
+          tells when someone is at home. What a key adds belongs to no member:
+          nobody is notified of it.
+        </p>
+        <p>
+          Legal basis: Art. 6(1)(b) GDPR; for the log, Art. 6(1)(f) GDPR — the
+          list members' and my own legitimate interest in recognising and
+          limiting a misused key.
         </p>
 
         <h2 id="tracking">No tracking across providers</h2>
@@ -615,6 +641,10 @@
           </li>
           <li>Reports about content: three years from receipt.</li>
           <li>
+            An API key's call log: 90 days. A key's details stay as long as the
+            list does, revoked or not.
+          </li>
+          <li>
             Feedback and error reports: until you delete the entry, at the
             latest when your account is deleted.
           </li>
@@ -684,7 +714,8 @@
           write to me, and I will delete it. Thank-yous you gave or received,
           the record of which entries you filled in, and your verdicts on
           entries (stars and remark) are deleted, including in other people’s
-          lists.
+          lists. API keys you made stop working; their name and what they added
+          stay in the list.
         </p>
         <p>
           An account without an email address is also deleted when you use it to
@@ -763,6 +794,7 @@
         <ul>
           <li>serving this website through GitHub;</li>
           <li>the access logs and sign-in sessions at Supabase;</li>
+          <li>the call log of API keys;</li>
           <li>retrieving preview images on the other members’ devices;</li>
           <li>
             the “Thanks” line and who planned, filled in or took over an entry

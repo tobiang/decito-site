@@ -16,7 +16,7 @@
     <main>
       <a class="back" href="../../">← Decito</a>
       <h1>Datenschutzerklärung</h1>
-      <p class="meta">Stand: 23. November 2026</p>
+      <p class="meta">Stand: 24. November 2026</p>
 
       <div class="doc">
         <h2 id="verantwortlicher">Verantwortlicher</h2>
@@ -261,6 +261,32 @@
           übernommen hat und wessen Aufgabe er war, Art. 6 Abs. 1 lit. f DSGVO —
           das berechtigte Interesse der Mitglieder einer Liste, auch Arbeit zu
           sehen und anzuerkennen, die sonst niemand bemerkt.
+        </p>
+
+        <h2 id="api">API-Schlüssel</h2>
+        <p>
+          Ein Admin oder die Besitzer:in einer Liste kann einen API-Schlüssel
+          anlegen, mit dem ein Dienst außerhalb der App — etwa Home Assistant —
+          Einträge in diese eine Liste setzt. Dafür speichere ich je Schlüssel
+          die Liste, wer ihn angelegt und wer ihn widerrufen hat, seinen Namen,
+          wann er angelegt wurde, abläuft, widerrufen und zuletzt benutzt wurde,
+          und was er darf. Vom Schlüssel selbst speichere ich nur einen
+          Hashwert; zeigen kann ihn danach niemand mehr, auch ich nicht.
+        </p>
+        <p>
+          Jeder Aufruf eines Schlüssels wird mit Zeitpunkt, Ergebnis und dem
+          betroffenen Eintrag protokolliert, damit ihr seht, was er getan hat,
+          und damit ein abgeflossener Schlüssel gebremst wird. Ich speichere
+          dabei keine IP-Adresse und keine Programmkennung. Name und Gültigkeit
+          eines Schlüssels sehen alle Mitglieder der Liste; wann er benutzt
+          wurde und das Protokoll nur Admins und die Besitzer:in, weil das
+          verrät, wann jemand zu Hause ist. Was ein Schlüssel einträgt, gehört
+          keinem Mitglied: Niemand bekommt dazu eine Mitteilung.
+        </p>
+        <p>
+          Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO; für das Protokoll Art. 6
+          Abs. 1 lit. f DSGVO — das berechtigte Interesse der Liste, einen
+          missbrauchten Schlüssel zu erkennen und zu begrenzen.
         </p>
 
         <h2 id="tracking">Kein Tracking über Anbieter hinweg</h2>
@@ -637,6 +663,10 @@
           </li>
           <li>Meldungen über Inhalte: drei Jahre ab Eingang.</li>
           <li>
+            Aufrufprotokoll eines API-Schlüssels: 90 Tage. Der Schlüssel selbst
+            bleibt, solange die Liste besteht, auch widerrufen.
+          </li>
+          <li>
             Feedback und Fehlerberichte: bis du den Eintrag löschst, spätestens
             mit der Löschung deines Kontos.
           </li>
@@ -707,7 +737,8 @@
           schreib mir; dann lösche ich es. Danke, die du gegeben oder bekommen
           hast, die Angaben, welche Einträge du ergänzt hast, und dein Fazit zu
           Einträgen (Sterne und Anmerkung) werden gelöscht, auch in Listen
-          anderer.
+          anderer. API-Schlüssel, die du angelegt hast, werden ungültig; ihr
+          Name und was sie eingetragen haben bleiben in der Liste.
         </p>
         <p>
           Ein Konto ohne E-Mail-Adresse wird auch gelöscht, wenn du dich von ihm
@@ -790,6 +821,7 @@
         <ul>
           <li>die Auslieferung dieser Website über GitHub;</li>
           <li>die Zugriffsprotokolle und Anmeldesitzungen bei Supabase;</li>
+          <li>das Aufrufprotokoll von API-Schlüsseln;</li>
           <li>
             den Abruf von Vorschaubildern auf den Geräten der übrigen
             Mitglieder;

@@ -1,0 +1,358 @@
+<!doctype html>
+<!-- adr-0755 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="How Home Assistant or a script adds items to a Decito list with an API key."
+    />
+    <title>API – Decito</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../../">← Decito</a>
+      <h1>Adding items from outside the app</h1>
+      <p class="meta">
+        Also available:
+        <a href="../../de/api/" hreflang="de" lang="de">Deutsch</a>.
+      </p>
+      <p class="meta">Last updated: November 24, 2026</p>
+
+      <p>
+        With an API key, another program, such as Home Assistant or a small
+        script, puts items on one of your lists without anyone opening the app.
+        The dishwasher finishes, and “Unload the dishwasher” is on the list for
+        today.
+      </p>
+
+      <h2 id="kann">What a key can do</h2>
+      <p>
+        A key belongs to exactly one list. There it can add an item or bring an
+        existing one back, and nothing else. It does not read the list, tick
+        anything off or delete anything. An archived list still takes items.
+      </p>
+      <p>
+        What a key adds belongs to no person in the list: nobody is notified,
+        nobody can thank anyone for it, and it counts for no one in Insights.
+        The item says where it came from: “Added by ‹key name›” (<span lang="de"
+          >„Hinzugefügt von ‹Name›“</span
+        >). Only Admins and the Owner can delete it.
+      </p>
+
+      <h2 id="schluessel">Getting a key</h2>
+      <p>
+        In the app: open the list → ⋮ → “Manage” → “API keys” (<span lang="de"
+          >„Verwalten“ → „API-Schlüssel“</span
+        >). Admins and the Owner of the list can make one if their account has
+        an e-mail address. An anonymous account is let go after two silent
+        years, and a key’s calls do not keep it alive. A list holds at most ten
+        valid keys.
+      </p>
+      <p>
+        The key starts with <code>dct_</code> and is shown
+        <strong>exactly once</strong>; Decito keeps only a fingerprint of it and
+        cannot show it to you again. Store it like a password.
+      </p>
+      <p>
+        A key may expire on a day you choose; whoever made it, or anyone ranked
+        above them, can extend it. It stops working as soon as the person who
+        made it leaves the list, is removed, deletes their account or loses the
+        right to make keys. And it can never do more than that person may do at
+        that moment.
+      </p>
+
+      <h2 id="sicherheit">Security</h2>
+      <p>
+        Design for the key to leak one day. It can then do no more than add or
+        bring back items on this one list, but even that should not last long.
+      </p>
+      <ul>
+        <li>
+          <strong>One key per service.</strong> Then you revoke only that one,
+          and the others keep working.
+        </li>
+        <li>
+          <strong>Revoke at the first suspicion.</strong> In the app, on the
+          key’s page; it takes effect at once. Every Admin and the Owner can do
+          it, whoever made the key.
+        </li>
+        <li>
+          <strong>Only in the header, never in a URL.</strong> Addresses end up
+          in histories and logs.
+        </li>
+        <li>
+          <strong>Home Assistant keeps secrets in plain text.</strong> Every
+          add-on with file access can read <code>secrets.yaml</code>. Never
+          share it when you show your configuration, and keep your backups
+          encrypted.
+        </li>
+      </ul>
+
+      <h2 id="home-assistant">Example: Home Assistant</h2>
+      <p>
+        <code>secrets.yaml</code> holds the key including the word
+        <code>Bearer</code>, because <code>!secret</code> always replaces the
+        whole value:
+      </p>
+      <pre
+        tabindex="0"
+        role="group"
+        aria-label="secrets.yaml"
+      ><code>decito_api_key: "Bearer dct_…"</code></pre>
+      <p>
+        The command goes into <code>configuration.yaml</code>. It sends
+        <code>day</code> and <code>assign_to_maker</code> only when the
+        automation passes them:
+      </p>
+      <pre
+        tabindex="0"
+        role="group"
+        aria-label="configuration.yaml: rest_command"
+      ><code>rest_command:
+  decito_add_item:
+    url: "https://api.decito.app/v1/items"
+    method: post
+    headers:
+      Authorization: !secret decito_api_key
+    content_type: "application/json"
+    payload: &gt;-
+      {% set p = {"title": title} %}
+      {% if day is defined %}{% set p = p | combine({"day": day}) %}{% endif %}
+      {% if assign_to_maker is defined %}{% set p = p | combine({"assign_to_maker": assign_to_maker}) %}{% endif %}
+      {{ p | to_json }}</code></pre>
+      <p>
+        And an automation that calls it when the dishwasher is done. Replace the
+        sensor and its state with your own:
+      </p>
+      <pre
+        tabindex="0"
+        role="group"
+        aria-label="configuration.yaml: automation"
+      ><code>automation:
+  - alias: "Dishwasher finished → Decito"
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.dishwasher_running
+        from: "on"
+        # Which state means "finished" depends on the device.
+        to: "off"
+    actions:
+      - action: rest_command.decito_add_item
+        data:
+          title: "Unload the dishwasher"
+          day: "today"
+          assign_to_maker: true</code></pre>
+      <p>
+        When Decito refuses a call, Home Assistant shows it under Settings →
+        System → Logs. What each call did is shown on the key’s page in the app;
+        look there once after setting it up.
+      </p>
+
+      <h2 id="curl">Example: curl</h2>
+      <p>
+        The key comes from the environment variable
+        <code>DECITO_API_KEY</code>, not from the script itself:
+      </p>
+      <pre
+        tabindex="0"
+        role="group"
+        aria-label="curl"
+      ><code>curl https://api.decito.app/v1/items \
+  -H "Authorization: Bearer $DECITO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Dishwasher tabs", "quantity": "1 pack"}'</code></pre>
+
+      <h2 id="aufruf">The call</h2>
+      <p>There is exactly one:</p>
+      <pre
+        tabindex="0"
+        role="group"
+        aria-label="The call"
+      ><code>POST https://api.decito.app/v1/items
+Authorization: Bearer dct_…
+Content-Type: application/json
+
+{
+  "title": "Unload the dishwasher",
+  "day": "today",
+  "assign_to_maker": true
+}</code></pre>
+      <p>In the JSON body:</p>
+      <ul>
+        <li>
+          <code>title</code> — the item’s name, 1 to 500 characters and not only
+          spaces. The only required field.
+        </li>
+        <li>
+          <code>day</code> — the day it is planned for: <code>"today"</code>
+          (today by the clock of the person who owns the list) or a date such as
+          <code>"2026-12-24"</code>. Not before today, and inside the item’s own
+          span if it has one. Lists without days refuse it.
+        </li>
+        <li>
+          <code>quantity</code> — how much, such as <code>"1 pack"</code>; 1 to
+          240 characters and not only spaces, on shopping lists only.
+        </li>
+        <li>
+          <code>url</code> — a link kept with the item; starts with
+          <code>http://</code> or <code>https://</code>, at most 2048
+          characters. Decito never fetches it; it opens only when someone taps
+          it.
+        </li>
+        <li>
+          <code>assign_to_maker</code> — <code>true</code> assigns the item to
+          the person who made the key. A key assigns no one else. Lists of
+          films, books and games refuse an assignment.
+        </li>
+      </ul>
+      <p>
+        A field the API does not know is refused, never ignored, so a typo shows
+        up on the first call. Fields added later change nothing for a call that
+        does not send them; anything that would break an existing call comes
+        with a new version in the path.
+      </p>
+
+      <h2 id="treffer">When the item is already there</h2>
+      <p>
+        The title is matched the way the app’s quick add matches it: case,
+        surrounding spaces and German umlauts do not matter, so “Kaese” finds
+        “Käse”. With several matches, an open item comes first, otherwise the
+        most recently changed one. Without a match, a new item is added.
+      </p>
+      <ul>
+        <li>
+          <strong>An open match</strong> gets only what it lacks: an empty day,
+          amount, link or assignee is filled, a different one is left alone. A
+          machine does not overrule a person.
+        </li>
+        <li>
+          <strong>A completed match</strong> comes back as a fresh round: its
+          checklist unticked, its old amount gone, a day in the past moved to
+          today.
+        </li>
+        <li>
+          <strong>A hidden match</strong> stays hidden, whether until a later
+          day or with no end date; the call is refused with
+          <code>item_hidden</code>.
+        </li>
+      </ul>
+
+      <h2 id="antwort">The answer</h2>
+      <p>Every success answers the same, whatever happened:</p>
+      <pre tabindex="0" role="group" aria-label="Answer on success"><code>200 OK
+
+{"ok": true, "key_expires_at": null}</code></pre>
+      <p>
+        Added, brought back or unchanged: the answer does not say, so a key in
+        the wrong hands cannot ask what is on the list. What each call did is
+        shown on the key’s page in the app, for Admins and the Owner.
+        <code>key_expires_at</code> says when the key expires, or is
+        <code>null</code> if it never does.
+      </p>
+      <p>
+        A refusal changes nothing and says why in its <code>error</code> field:
+      </p>
+      <pre
+        tabindex="0"
+        role="group"
+        aria-label="Answer on refusal"
+      ><code>422 Unprocessable Content
+
+{"error": "unknown_field", "field": "titel"}</code></pre>
+      <dl class="codes">
+        <dt><code>not_found</code> · 404</dt>
+        <dd>No such address; the path is <code>/v1/items</code>.</dd>
+        <dt><code>method_not_allowed</code> · 405</dt>
+        <dd>
+          Only <code>POST</code> is allowed; the <code>Allow</code> header says
+          so too.
+        </dd>
+        <dt><code>key_missing</code> · 401</dt>
+        <dd>No <code>Authorization: Bearer …</code> header.</dd>
+        <dt><code>key_unknown</code> · 401</dt>
+        <dd>No such key, often a copying mistake.</dd>
+        <dt><code>key_revoked</code> · 401</dt>
+        <dd>
+          The key was revoked, or the person who made it may no longer do so.
+        </dd>
+        <dt><code>key_expired</code> · 401</dt>
+        <dd>The key has expired; it can be extended in the app.</dd>
+        <dt><code>action_not_granted</code> · 403</dt>
+        <dd>This key may not do that.</dd>
+        <dt><code>json_expected</code> · 415</dt>
+        <dd>
+          The <code>Content-Type: application/json</code> header is missing.
+        </dd>
+        <dt><code>body_too_large</code> · 413</dt>
+        <dd>
+          The body is larger than 8 KiB; see <a href="#grenzen">Limits</a>.
+        </dd>
+        <dt><code>invalid_body</code> · 422</dt>
+        <dd>The body is not a JSON object.</dd>
+        <dt><code>unknown_field</code> · 422</dt>
+        <dd>A field the API does not know; <code>field</code> names it.</dd>
+        <dt><code>invalid_title</code> · 422</dt>
+        <dd>The title is missing, empty or too long.</dd>
+        <dt><code>invalid_day</code> · 422</dt>
+        <dd>Neither <code>"today"</code> nor a date.</dd>
+        <dt><code>invalid_quantity</code> · 422</dt>
+        <dd>The amount is empty, too long or not text.</dd>
+        <dt><code>invalid_url</code> · 422</dt>
+        <dd>
+          Not an <code>http</code> or <code>https</code> link, or too long.
+        </dd>
+        <dt><code>invalid_assign_to_maker</code> · 422</dt>
+        <dd>Neither <code>true</code> nor <code>false</code>.</dd>
+        <dt><code>day_in_past</code> · 422</dt>
+        <dd>The day is before today.</dd>
+        <dt><code>day_outside_frame</code> · 422</dt>
+        <dd>The day lies outside the span the item has.</dd>
+        <dt><code>field_not_on_this_list</code> · 422</dt>
+        <dd>
+          This kind of list does not carry the field, such as an amount outside
+          a shopping list.
+        </dd>
+        <dt><code>item_hidden</code> · 409</dt>
+        <dd>
+          The matching item is hidden; see
+          <a href="#treffer">When the item is already there</a>.
+        </dd>
+        <dt><code>too_many_items</code> · 409</dt>
+        <dd>The list already holds as many items as it may.</dd>
+        <dt><code>rate_limited</code> · 429</dt>
+        <dd>Too many calls; see <a href="#grenzen">Limits</a>.</dd>
+        <dt><code>unavailable</code> · 503</dt>
+        <dd>Decito cannot be reached right now; try again later.</dd>
+      </dl>
+
+      <h2 id="grenzen">Limits</h2>
+      <p>Each key may make at most:</p>
+      <ul>
+        <li>5 calls in 10 seconds,</li>
+        <li>30 a minute,</li>
+        <li>300 an hour,</li>
+        <li>1000 a day.</li>
+      </ul>
+      <p>
+        Every call counts, a refused one too. Only a call that is itself
+        answered with <code>429</code> and <code>rate_limited</code> does not.
+        The <code>Retry-After</code> header and the
+        <code>retry_after</code> field give the length in seconds of the window
+        the key ran over: wait that long.
+      </p>
+      <p>
+        A call’s body may be at most 8 KiB. A list’s cap on items applies to a
+        key as to everyone else.
+      </p>
+
+      <p class="meta">
+        Machine-readable, as OpenAPI 3.1:
+        <a href="../../api/openapi.yaml">openapi.yaml</a>.
+      </p>
+    </main>
+  </body>
+</html>

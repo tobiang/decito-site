@@ -296,6 +296,55 @@ li::marker {
   color: var(--primary);
 }
 
+/* --- Code ------------------------------------------------------------------
+ * For the API page. The system's monospace, not a third font file: code is
+ * copied, not read for its voice. A key, a URL, a YAML line must never be
+ * hyphenated or broken — a block scrolls sideways instead, and inline code
+ * keeps the body's break-word backstop for a 320px screen.
+ */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  font-variation-settings: normal;
+  hyphens: none;
+}
+
+/* --edge is a divider and nearly vanishes against the paper; a panel's border
+   has to hold 3:1 to read as a block, which meta mixed into the paper does in
+   both brightnesses without a token of its own per scheme. */
+pre {
+  margin: 0 0 var(--gap-detail);
+  padding: var(--gap-detail);
+  overflow-x: auto;
+  background: var(--container);
+  border: 1px solid color-mix(in srgb, var(--meta) 65%, var(--surface));
+  border-radius: 8px;
+  line-height: 1.5;
+  overflow-wrap: normal;
+}
+
+pre:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+pre code {
+  white-space: pre;
+}
+
+.codes {
+  margin: 0 0 var(--gap-detail);
+}
+
+.codes dt {
+  margin-top: var(--gap-detail);
+}
+
+.codes dd {
+  margin: 0;
+  color: var(--meta);
+}
+
 /* --- Start page -----------------------------------------------------------
  * One screen, centred, no scroll (DESIGN.md).
  *

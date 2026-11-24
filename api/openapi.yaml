@@ -1,0 +1,208 @@
+openapi: 3.1.0
+info:
+  title: Decito Public API
+  version: "1"
+  summary: Add items to one Decito list from outside the app.
+  description: |
+    An API key belongs to one list and is made in the app by an Admin or the
+    Owner of that list („Verwalten" → „API-Schlüssel"). It is shown once.
+    Whatever a key adds belongs to no person in the list: nobody is notified,
+    and the item says it came from the key.
+
+    A field this API does not know is refused, never ignored. Fields added
+    later never change what a call without them does; a change that would
+    break a caller comes with a new version in the path.
+
+    Design for the key to leak: give each service its own key, and revoke one
+    in the app the moment you suspect it.
+  license:
+    name: Proprietary
+    url: https://decito.app/en/terms/
+servers:
+  - url: https://api.decito.app/v1
+security:
+  - apiKey: []
+paths:
+  /items:
+    post:
+      operationId: addItem
+      summary: Add an item, or bring its twin back
+      description: |
+        The title is matched against the list the way the app's quick-add
+        bar matches it: case, surrounding spaces and German umlauts do not
+        matter („Kaese" finds „Käse"). Without a match, a new item is added.
+
+        A match that is open gets only what it lacks: an empty day, amount,
+        link or assignee is filled, a different one is left alone. A match
+        that was completed comes back as a fresh round: its checklist
+        unticked, its old amount gone, a day in the past moved to today. A
+        match hidden until a later day is left hidden.
+
+        Every success answers the same, whatever happened; the app shows
+        what each call did on the key's page.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewItem"
+            examples:
+              chore:
+                summary: A chore for the key's maker, today
+                value:
+                  title: Spülmaschine ausräumen
+                  day: today
+                  assign_to_maker: true
+              shopping:
+                summary: Something to buy
+                value:
+                  title: Spülmaschinentabs
+                  quantity: 1 Packung
+      responses:
+        "200":
+          description: The item is on the list.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Done"
+        "401":
+          $ref: "#/components/responses/Refused"
+        "403":
+          $ref: "#/components/responses/Refused"
+        "404":
+          $ref: "#/components/responses/Refused"
+        "405":
+          description: Only POST is answered here.
+          headers:
+            Allow:
+              schema:
+                type: string
+                const: POST
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Refusal"
+        "409":
+          $ref: "#/components/responses/Refused"
+        "413":
+          $ref: "#/components/responses/Refused"
+        "415":
+          $ref: "#/components/responses/Refused"
+        "422":
+          $ref: "#/components/responses/Refused"
+        "429":
+          description: Too many calls; wait as long as `Retry-After` says.
+          headers:
+            Retry-After:
+              description: |
+                The length in seconds of the window the key ran over: wait
+                that long before calling again.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Refusal"
+        "503":
+          $ref: "#/components/responses/Refused"
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: |
+        `Authorization: Bearer dct_…`. Never put the key in a URL.
+  responses:
+    Refused:
+      description: Nothing was changed; `error` says why.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Refusal"
+  schemas:
+    NewItem:
+      type: object
+      additionalProperties: false
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+          pattern: "\\S"
+        day:
+          description: |
+            The day it is planned for: `today` (in the list Owner's time
+            zone) or a date. Not before today, and inside the item's own
+            span if it has one. Lists without days refuse it.
+          oneOf:
+            - type: string
+              const: today
+            - type: string
+              format: date
+        quantity:
+          description: How much — on a shopping list only.
+          type: string
+          minLength: 1
+          maxLength: 240
+          pattern: "\\S"
+        url:
+          description: |
+            A link kept with the item. Nothing fetches it; a person's tap
+            opens it.
+          type: string
+          format: uri
+          pattern: "^[Hh][Tt][Tt][Pp][Ss]?://"
+          maxLength: 2048
+        assign_to_maker:
+          description: |
+            Makes the key's maker the one it is assigned to. A key assigns no
+            one else. Lists of films, books and games refuse it.
+          type: boolean
+    Done:
+      type: object
+      additionalProperties: false
+      required: [ok, key_expires_at]
+      properties:
+        ok:
+          const: true
+        key_expires_at:
+          description: When the key stops working, or null if it never does.
+          type: [string, "null"]
+          format: date-time
+    Refusal:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          enum:
+            - not_found
+            - method_not_allowed
+            - key_missing
+            - key_unknown
+            - key_revoked
+            - key_expired
+            - action_not_granted
+            - json_expected
+            - body_too_large
+            - invalid_body
+            - unknown_field
+            - invalid_title
+            - invalid_day
+            - invalid_quantity
+            - invalid_url
+            - invalid_assign_to_maker
+            - day_in_past
+            - day_outside_frame
+            - field_not_on_this_list
+            - item_hidden
+            - too_many_items
+            - rate_limited
+            - unavailable
+        field:
+          description: The unknown field, with `unknown_field`.
+          type: string
+        retry_after:
+          description: Seconds to wait, with `rate_limited`.
+          type: integer

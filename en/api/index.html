@@ -114,7 +114,7 @@
         aria-label="configuration.yaml: rest_command"
       ><code>rest_command:
   decito_add_item:
-    url: "https://api.decito.app/v1/items"
+    url: "https://api.decito.app/functions/v1/items"
     method: post
     headers:
       Authorization: !secret decito_api_key
@@ -161,7 +161,7 @@
         tabindex="0"
         role="group"
         aria-label="curl"
-      ><code>curl https://api.decito.app/v1/items \
+      ><code>curl https://api.decito.app/functions/v1/items \
   -H "Authorization: Bearer $DECITO_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"title": "Dishwasher tabs", "quantity": "1 pack"}'</code></pre>
@@ -172,7 +172,7 @@
         tabindex="0"
         role="group"
         aria-label="The call"
-      ><code>POST https://api.decito.app/v1/items
+      ><code>POST https://api.decito.app/functions/v1/items
 Authorization: Bearer dct_…
 Content-Type: application/json
 
@@ -212,8 +212,8 @@ Content-Type: application/json
       <p>
         A field the API does not know is refused, never ignored, so a typo shows
         up on the first call. Fields added later change nothing for a call that
-        does not send them; anything that would break an existing call comes
-        with a new version in the path.
+        does not send them; anything that would break an existing call comes as
+        a new address beside this one.
       </p>
 
       <h2 id="treffer">When the item is already there</h2>
@@ -265,7 +265,7 @@ Content-Type: application/json
 {"error": "unknown_field", "field": "titel"}</code></pre>
       <dl class="codes">
         <dt><code>not_found</code> · 404</dt>
-        <dd>No such address; the path is <code>/v1/items</code>.</dd>
+        <dd>No such address; the path is <code>/functions/v1/items</code>.</dd>
         <dt><code>method_not_allowed</code> · 405</dt>
         <dd>
           Only <code>POST</code> is allowed; the <code>Allow</code> header says

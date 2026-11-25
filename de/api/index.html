@@ -116,7 +116,7 @@
         aria-label="configuration.yaml: rest_command"
       ><code>rest_command:
   decito_add_item:
-    url: "https://api.decito.app/v1/items"
+    url: "https://api.decito.app/functions/v1/items"
     method: post
     headers:
       Authorization: !secret decito_api_key
@@ -164,7 +164,7 @@
         tabindex="0"
         role="group"
         aria-label="curl"
-      ><code>curl https://api.decito.app/v1/items \
+      ><code>curl https://api.decito.app/functions/v1/items \
   -H "Authorization: Bearer $DECITO_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"title": "Spülmaschinentabs", "quantity": "1 Packung"}'</code></pre>
@@ -175,7 +175,7 @@
         tabindex="0"
         role="group"
         aria-label="Aufruf"
-      ><code>POST https://api.decito.app/v1/items
+      ><code>POST https://api.decito.app/functions/v1/items
 Authorization: Bearer dct_…
 Content-Type: application/json
 
@@ -218,8 +218,8 @@ Content-Type: application/json
         Ein Feld, das die API nicht kennt, wird abgelehnt, nie übergangen. So
         fällt ein Tippfehler beim ersten Aufruf auf. Felder, die später
         dazukommen, ändern nichts an einem Aufruf, der sie nicht schickt; was
-        einen bestehenden Aufruf brechen würde, kommt mit einer neuen Version im
-        Pfad.
+        einen bestehenden Aufruf brechen würde, kommt als neue Adresse neben
+        dieser.
       </p>
 
       <h2 id="treffer">Wenn es den Eintrag schon gibt</h2>
@@ -279,7 +279,8 @@ Content-Type: application/json
       <dl class="codes">
         <dt><code>not_found</code> · 404</dt>
         <dd>
-          Diese Adresse gibt es nicht; der Pfad ist <code>/v1/items</code>.
+          Diese Adresse gibt es nicht; der Pfad ist
+          <code>/functions/v1/items</code>.
         </dd>
         <dt><code>method_not_allowed</code> · 405</dt>
         <dd>

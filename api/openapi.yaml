@@ -11,7 +11,7 @@ info:
 
     A field this API does not know is refused, never ignored. Fields added
     later never change what a call without them does; a change that would
-    break a caller comes with a new version in the path.
+    break a caller comes as a new address beside this one.
 
     Design for the key to leak: give each service its own key, and revoke one
     in the app the moment you suspect it.
@@ -19,7 +19,7 @@ info:
     name: Proprietary
     url: https://decito.app/en/terms/
 servers:
-  - url: https://api.decito.app/v1
+  - url: https://api.decito.app/functions/v1
 security:
   - apiKey: []
 paths:

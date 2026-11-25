@@ -271,17 +271,29 @@
           die Liste, wer ihn angelegt und wer ihn widerrufen hat, seinen Namen,
           wann er angelegt wurde, abläuft, widerrufen und zuletzt benutzt wurde,
           und was er darf. Vom Schlüssel selbst speichere ich nur einen
-          Hashwert; zeigen kann ihn danach niemand mehr, auch ich nicht.
+          Hashwert; zeigen kann ihn danach niemand mehr, auch ich nicht. Wird
+          das Konto, das ihn angelegt hat, gesperrt, widerrufe ich den
+          Schlüssel.
         </p>
         <p>
-          Jeder Aufruf eines Schlüssels wird mit Zeitpunkt, Ergebnis und dem
-          betroffenen Eintrag protokolliert, damit ihr seht, was er getan hat,
-          und damit ein abgeflossener Schlüssel gebremst wird. Ich speichere
-          dabei keine IP-Adresse und keine Programmkennung. Name und Gültigkeit
-          eines Schlüssels sehen alle Mitglieder der Liste; wann er benutzt
-          wurde und das Protokoll nur Admins und die Besitzer:in, weil das
-          verrät, wann jemand zu Hause ist. Was ein Schlüssel einträgt, gehört
-          keinem Mitglied: Niemand bekommt dazu eine Mitteilung.
+          Was die Aufrufe eines Schlüssels bewirken, protokolliere ich mit
+          Zeitpunkt, Ergebnis und dem betroffenen Eintrag, damit ihr seht, was
+          er getan hat, und damit ein abgeflossener Schlüssel gebremst wird;
+          auch eine Verlängerung steht darin. Dieselbe Ablehnung, binnen einer
+          Minute wiederholt, teilt sich eine Zeile mit einer Zählung; die
+          Ablehnungen eines widerrufenen oder abgelaufenen Schlüssels stehen nur
+          einmal darin; ein Aufruf mit unbekanntem Schlüssel oder einer, der
+          schon als fehlerhaft abgewiesen wird, gar nicht. Das Protokoll enthält
+          keine IP-Adresse und keine Programmkennung; Supabase erfasst sie wie
+          bei jeder Verbindung in seinen Zugriffsprotokollen (siehe
+          <a href="#konto">Konto und Anmeldung</a>). Den Namen eines Schlüssels,
+          wer ihn wann angelegt hat und ob er noch wirkt, sehen alle Mitglieder
+          der Liste; Ablauf, letzte Nutzung und Protokoll nur Admins und die
+          Besitzer:in, weil das verrät, wann jemand zu Hause ist. Wann ein
+          Eintrag entstanden ist, den ein Schlüssel gesetzt hat, sehen aber alle
+          Mitglieder, wie bei jedem Eintrag — so viel davon, wann ein Schlüssel
+          benutzt wurde, ist für alle sichtbar. Was ein Schlüssel einträgt,
+          gehört keinem Mitglied: Niemand bekommt dazu eine Mitteilung.
         </p>
         <p>
           Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO; für das Protokoll Art. 6
@@ -663,8 +675,9 @@
           </li>
           <li>Meldungen über Inhalte: drei Jahre ab Eingang.</li>
           <li>
-            Aufrufprotokoll eines API-Schlüssels: 90 Tage. Der Schlüssel selbst
-            bleibt, solange die Liste besteht, auch widerrufen.
+            Aufrufprotokoll eines API-Schlüssels: 90 Tage. Die Angaben zum
+            Schlüssel bleiben, solange die Liste besteht; widerrufen werden sie
+            nach 90 Tagen gelöscht, wenn kein Eintrag ihn mehr nennt.
           </li>
           <li>
             Feedback und Fehlerberichte: bis du den Eintrag löschst, spätestens

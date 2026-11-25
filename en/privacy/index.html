@@ -264,18 +264,25 @@
           list. For each key I store the list, who made it and who revoked it,
           its name, when it was made, expires, was revoked and was last used,
           and what it may do. Of the key itself I store only a hash; no one can
-          show it again afterwards, me included.
+          show it again afterwards, me included. If the account that made it is
+          suspended, I revoke the key.
         </p>
         <p>
-          Every call a key makes is logged with its time, its outcome and the
-          item it touched, so you can see what it did and so that a leaked key
-          is slowed down. The log holds no IP address and no program identifier;
-          Supabase records them, as for any connection, in its access logs (see
+          I log what a key's calls do, with the time, the outcome and the item
+          touched, so you can see what it did and so that a leaked key is slowed
+          down; extending a key is logged too. The same refusal repeated within
+          a minute shares one line with a count, a revoked or expired key's
+          refusals are logged once, and a call with an unknown key, or one
+          turned away as malformed, is not logged at all. The log holds no IP
+          address and no program identifier; Supabase records them, as for any
+          connection, in its access logs (see
           <a href="#konto">Account and sign-in</a>). Every member of the list
           sees a key's name, who made it, when, and whether it still works; its
           expiry, last use and log only Admins and the owner see, because that
-          tells when someone is at home. What a key adds belongs to no member:
-          nobody is notified of it.
+          tells when someone is at home. Every member does see when an item a
+          key added was created, as for any item, so that much of when a key was
+          used is visible to all. What a key adds belongs to no member: nobody
+          is notified of it.
         </p>
         <p>
           Legal basis: Art. 6(1)(b) GDPR; for the log, Art. 6(1)(f) GDPR — the
@@ -642,7 +649,8 @@
           <li>Reports about content: three years from receipt.</li>
           <li>
             An API key's call log: 90 days. A key's details stay as long as the
-            list does, revoked or not.
+            list does; once revoked, they are deleted after 90 days if no item
+            names the key.
           </li>
           <li>
             Feedback and error reports: until you delete the entry, at the

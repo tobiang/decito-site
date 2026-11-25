@@ -1,12 +1,13 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   title: Decito Public API
   version: "1"
-  summary: Add items to one Decito list from outside the app.
   description: |
-    An API key belongs to one list and is made in the app by an Admin or the
-    Owner of that list („Verwalten" → „API-Schlüssel"). It is shown once.
-    Whatever a key adds belongs to no person in the list: nobody is notified,
+    Add items to one Decito collection from outside the app.
+
+    An API key belongs to one collection and is made in the app by an Admin or the
+    Owner of that collection („Verwalten" → „API-Schlüssel"). It is shown once.
+    Whatever a key adds belongs to no person in the collection: nobody is notified,
     and the item says it came from the key.
 
     A field this API does not know is refused, never ignored. Fields added
@@ -28,7 +29,7 @@ paths:
       operationId: addItem
       summary: Add an item, or bring its twin back
       description: |
-        The title is matched against the list the way the app's quick-add
+        The title is matched against the collection the way the app's quick-add
         bar matches it: case, surrounding spaces and German umlauts do not
         matter („Kaese" finds „Käse"). Without a match, a new item is added.
 
@@ -60,7 +61,7 @@ paths:
                   quantity: 1 Packung
       responses:
         "200":
-          description: The item is on the list.
+          description: The item is in the collection.
           content:
             application/json:
               schema:
@@ -77,7 +78,7 @@ paths:
             Allow:
               schema:
                 type: string
-                const: POST
+                enum: [POST]
           content:
             application/json:
               schema:
@@ -132,12 +133,12 @@ components:
           pattern: "\\S"
         day:
           description: |
-            The day it is planned for: `today` (in the list Owner's time
+            The day it is planned for: `today` (in the collection Owner's time
             zone) or a date. Not before today, and inside the item's own
-            span if it has one. Lists without days refuse it.
+            span if it has one. Collections without days refuse it.
           oneOf:
             - type: string
-              const: today
+              enum: [today]
             - type: string
               format: date
         quantity:
@@ -157,7 +158,7 @@ components:
         assign_to_maker:
           description: |
             Makes the key's maker the one it is assigned to. A key assigns no
-            one else. Lists of films, books and games refuse it.
+            one else. Collections of films, books and games refuse it.
           type: boolean
     Done:
       type: object
@@ -165,11 +166,13 @@ components:
       required: [ok, key_expires_at]
       properties:
         ok:
-          const: true
+          type: boolean
+          enum: [true]
         key_expires_at:
           description: When the key stops working, or null if it never does.
-          type: [string, "null"]
+          type: string
           format: date-time
+          nullable: true
     Refusal:
       type: object
       required: [error]

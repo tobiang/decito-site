@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
-      content="How Home Assistant or a script adds items to a Decito list with an API key."
+      content="How Home Assistant or a script adds items to a Decito collection with an API key."
     />
     <title>API – Decito</title>
     <link rel="stylesheet" href="../../style.css" />
@@ -24,33 +24,36 @@
 
       <p>
         With an API key, another program, such as Home Assistant or a small
-        script, puts items on one of your lists without anyone opening the app.
-        The dishwasher finishes, and “Unload the dishwasher” is on the list for
-        today.
+        script, puts items in one of your collections without anyone opening the
+        app. The dishwasher finishes, and “Unload the dishwasher” is in the
+        collection for today.
       </p>
 
       <h2 id="kann">What a key can do</h2>
       <p>
-        A key belongs to exactly one list. There it can add an item or bring an
-        existing one back, and nothing else. It does not read the list, tick
-        anything off or delete anything. An archived list still takes items.
+        A key belongs to exactly one collection. There it can add an item or
+        bring an existing one back, and nothing else. It does not read the
+        collection, tick anything off or delete anything. An archived collection
+        still takes items.
       </p>
       <p>
-        What a key adds belongs to no person in the list: nobody is notified,
-        nobody can thank anyone for it, and it counts for no one in Insights.
-        The item says where it came from: “Added by ‹key name›” (<span lang="de"
+        What a key adds belongs to no person in the collection: nobody is
+        notified, nobody can thank anyone for it, and it counts for no one in
+        Insights. The item says where it came from: “Added by ‹key name›” (<span
+          lang="de"
           >„Hinzugefügt von ‹Name›“</span
         >). Only Admins and the Owner can delete it.
       </p>
 
       <h2 id="schluessel">Getting a key</h2>
       <p>
-        In the app: open the list → ⋮ → “Manage” → “API keys” (<span lang="de"
+        In the app: open the collection → ⋮ → “Manage” → “API keys” (<span
+          lang="de"
           >„Verwalten“ → „API-Schlüssel“</span
-        >). Admins and the Owner of the list can make one if their account has
-        an e-mail address. An anonymous account is let go after two silent
-        years, and a key’s calls do not keep it alive. A list holds at most ten
-        valid keys.
+        >). Admins and the Owner of the collection can make one if their account
+        has an e-mail address. An anonymous account is let go after two silent
+        years, and a key’s calls do not keep it alive. A collection holds at
+        most ten valid keys.
       </p>
       <p>
         The key starts with <code>dct_</code> and is shown
@@ -60,15 +63,16 @@
       <p>
         A key may expire on a day you choose; whoever made it, or anyone ranked
         above them, can extend it. It stops working as soon as the person who
-        made it leaves the list, is removed, deletes their account or loses the
-        right to make keys. And it can never do more than that person may do at
-        that moment.
+        made it leaves the collection, is removed, deletes their account or
+        loses the right to make keys. And it can never do more than that person
+        may do at that moment.
       </p>
 
       <h2 id="sicherheit">Security</h2>
       <p>
         Design for the key to leak one day. It can then do no more than add or
-        bring back items on this one list, but even that should not last long.
+        bring back items in this one collection, but even that should not last
+        long.
       </p>
       <ul>
         <li>
@@ -189,9 +193,10 @@ Content-Type: application/json
         </li>
         <li>
           <code>day</code> — the day it is planned for: <code>"today"</code>
-          (today by the clock of the person who owns the list) or a date such as
+          (today by the clock of the person who owns the collection) or a date
+          such as
           <code>"2026-12-24"</code>. Not before today, and inside the item’s own
-          span if it has one. Lists without days refuse it.
+          span if it has one. Collections without days refuse it.
         </li>
         <li>
           <code>quantity</code> — how much, such as <code>"1 pack"</code>; 1 to
@@ -205,7 +210,7 @@ Content-Type: application/json
         </li>
         <li>
           <code>assign_to_maker</code> — <code>true</code> assigns the item to
-          the person who made the key. A key assigns no one else. Lists of
+          the person who made the key. A key assigns no one else. Collections of
           films, books and games refuse an assignment.
         </li>
       </ul>
@@ -248,8 +253,8 @@ Content-Type: application/json
 {"ok": true, "key_expires_at": null}</code></pre>
       <p>
         Added, brought back or unchanged: the answer does not say, so a key in
-        the wrong hands cannot ask what is on the list. What each call did is
-        shown on the key’s page in the app, for Admins and the Owner.
+        the wrong hands cannot ask what is in the collection. What each call did
+        is shown on the key’s page in the app, for Admins and the Owner.
         <code>key_expires_at</code> says when the key expires, or is
         <code>null</code> if it never does.
       </p>
@@ -313,8 +318,8 @@ Content-Type: application/json
         <dd>The day lies outside the span the item has.</dd>
         <dt><code>field_not_on_this_list</code> · 422</dt>
         <dd>
-          This kind of list does not carry the field, such as an amount outside
-          a shopping list.
+          This kind of collection does not carry the field, such as an amount
+          outside a shopping list.
         </dd>
         <dt><code>item_hidden</code> · 409</dt>
         <dd>
@@ -322,7 +327,7 @@ Content-Type: application/json
           <a href="#treffer">When the item is already there</a>.
         </dd>
         <dt><code>too_many_items</code> · 409</dt>
-        <dd>The list already holds as many items as it may.</dd>
+        <dd>The collection already holds as many items as it may.</dd>
         <dt><code>rate_limited</code> · 429</dt>
         <dd>Too many calls; see <a href="#grenzen">Limits</a>.</dd>
         <dt><code>unavailable</code> · 503</dt>
@@ -345,12 +350,12 @@ Content-Type: application/json
         the key ran over: wait that long.
       </p>
       <p>
-        A call’s body may be at most 8 KiB. A list’s cap on items applies to a
-        key as to everyone else.
+        A call’s body may be at most 8 KiB. A collection’s cap on items applies
+        to a key as to everyone else.
       </p>
 
       <p class="meta">
-        Machine-readable, as OpenAPI 3.1:
+        Machine-readable, as OpenAPI 3.0:
         <a href="../../api/openapi.yaml">openapi.yaml</a>.
       </p>
     </main>

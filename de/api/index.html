@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
-      content="Wie Home Assistant oder ein Skript mit einem API-Schlüssel Einträge auf eine Decito-Liste setzt."
+      content="Wie Home Assistant oder ein Skript mit einem API-Schlüssel Einträge in eine Decito-Sammlung setzt."
     />
     <title>API – Decito</title>
     <link rel="stylesheet" href="../../style.css" />
@@ -24,33 +24,33 @@
 
       <p>
         Mit einem API-Schlüssel setzt ein anderes Programm, etwa Home Assistant
-        oder ein kleines Skript, Einträge auf eine deiner Listen, ohne dass
+        oder ein kleines Skript, Einträge in eine deiner Sammlungen, ohne dass
         jemand die App öffnet. Die Spülmaschine ist fertig, und „Spülmaschine
-        ausräumen“ steht für heute auf der Liste.
+        ausräumen“ steht für heute in der Sammlung.
       </p>
 
       <h2 id="kann">Was ein Schlüssel kann</h2>
       <p>
-        Ein Schlüssel gehört zu genau einer Liste. Dort kann er einen Eintrag
+        Ein Schlüssel gehört zu genau einer Sammlung. Dort kann er einen Eintrag
         hinzufügen oder einen vorhandenen zurückholen, sonst nichts. Er liest
-        die Liste nicht, hakt nichts ab und löscht nichts. Auch eine archivierte
-        Liste nimmt Einträge an.
+        die Sammlung nicht, hakt nichts ab und löscht nichts. Auch eine
+        archivierte Sammlung nimmt Einträge an.
       </p>
       <p>
-        Was ein Schlüssel hinzufügt, gehört keiner Person in der Liste: Niemand
-        bekommt eine Benachrichtigung, niemand kann sich dafür bedanken, und in
-        den Einblicken zählt es für niemanden. Der Eintrag sagt, woher er kam:
-        „Hinzugefügt von ‹Name des Schlüssels›“. Löschen können ihn nur Admins
-        und Besitzer:in.
+        Was ein Schlüssel hinzufügt, gehört keiner Person in der Sammlung:
+        Niemand bekommt eine Benachrichtigung, niemand kann sich dafür bedanken,
+        und in den Einblicken zählt es für niemanden. Der Eintrag sagt, woher er
+        kam: „Hinzugefügt von ‹Name des Schlüssels›“. Löschen können ihn nur
+        Admins und Besitzer:in.
       </p>
 
       <h2 id="schluessel">Einen Schlüssel bekommen</h2>
       <p>
-        In der App: Liste öffnen → ⋮ → „Verwalten“ → „API-Schlüssel“. Anlegen
-        können ihn Admins und Besitzer:in der Liste, wenn ihr Konto eine
+        In der App: Sammlung öffnen → ⋮ → „Verwalten“ → „API-Schlüssel“. Anlegen
+        können ihn Admins und Besitzer:in der Sammlung, wenn ihr Konto eine
         E-Mail-Adresse hat. Ein anonymes Konto wird nach zwei stillen Jahren
         gelöscht, und die Aufrufe eines Schlüssels halten es nicht am Leben.
-        Eine Liste hat höchstens zehn gültige Schlüssel.
+        Eine Sammlung hat höchstens zehn gültige Schlüssel.
       </p>
       <p>
         Der Schlüssel beginnt mit <code>dct_</code> und wird
@@ -61,7 +61,7 @@
       <p>
         Ein Schlüssel kann an einem gewählten Tag ablaufen; wer ihn angelegt hat
         oder höher steht, verlängert ihn. Er hört auf zu wirken, sobald die
-        Person, die ihn angelegt hat, die Liste verlässt, entfernt wird, ihr
+        Person, die ihn angelegt hat, die Sammlung verlässt, entfernt wird, ihr
         Konto löscht oder das Recht verliert, Schlüssel anzulegen. Und er kann
         nie mehr, als diese Person gerade darf.
       </p>
@@ -69,7 +69,7 @@
       <h2 id="sicherheit">Sicherheit</h2>
       <p>
         Plane ein, dass ein Schlüssel irgendwann in falsche Hände gerät. Mehr
-        als Einträge auf diese eine Liste setzen oder zurückholen kann er dann
+        als Einträge in diese eine Sammlung setzen oder zurückholen kann er dann
         nicht, aber auch das soll nicht lange gehen.
       </p>
       <ul>
@@ -192,10 +192,10 @@ Content-Type: application/json
         </li>
         <li>
           <code>day</code> — der Tag, für den er geplant ist:
-          <code>"today"</code> (heute nach der Uhr der Person, der die Liste
+          <code>"today"</code> (heute nach der Uhr der Person, der die Sammlung
           gehört) oder ein Datum wie <code>"2026-12-24"</code>. Nicht vor heute,
           und innerhalb des eigenen Zeitraums des Eintrags, falls er einen hat.
-          Listen ohne Tage lehnen das Feld ab.
+          Sammlungen ohne Tage lehnen das Feld ab.
         </li>
         <li>
           <code>quantity</code> — wie viel, etwa <code>"1 Packung"</code>; 1 bis
@@ -210,8 +210,8 @@ Content-Type: application/json
         <li>
           <code>assign_to_maker</code> — <code>true</code> weist den Eintrag der
           Person zu, die den Schlüssel angelegt hat. Jemand anderem kann ein
-          Schlüssel nichts zuweisen. Listen für Filme, Bücher und Spiele lehnen
-          eine Zuweisung ab.
+          Schlüssel nichts zuweisen. Sammlungen für Filme, Bücher und Spiele
+          lehnen eine Zuweisung ab.
         </li>
       </ul>
       <p>
@@ -261,7 +261,7 @@ Content-Type: application/json
       <p>
         Neu angelegt, zurückgeholt oder unverändert: Die Antwort verrät es
         nicht, damit ein Schlüssel in falschen Händen nicht abfragen kann, was
-        auf der Liste steht. Was jeder Aufruf bewirkt hat, zeigt die Seite des
+        in der Sammlung steht. Was jeder Aufruf bewirkt hat, zeigt die Seite des
         Schlüssels in der App, für Admins und Besitzer:in.
         <code>key_expires_at</code> sagt, wann der Schlüssel abläuft, oder ist
         <code>null</code>, wenn er nie abläuft.
@@ -330,7 +330,7 @@ Content-Type: application/json
         <dd>Der Tag liegt außerhalb des Zeitraums, den der Eintrag hat.</dd>
         <dt><code>field_not_on_this_list</code> · 422</dt>
         <dd>
-          Diese Art Liste hat das Feld nicht, etwa eine Menge außerhalb einer
+          Diese Art Sammlung hat das Feld nicht, etwa eine Menge außerhalb einer
           Einkaufsliste.
         </dd>
         <dt><code>item_hidden</code> · 409</dt>
@@ -339,7 +339,7 @@ Content-Type: application/json
           <a href="#treffer">Wenn es den Eintrag schon gibt</a>.
         </dd>
         <dt><code>too_many_items</code> · 409</dt>
-        <dd>Die Liste hat schon so viele Einträge, wie sie fassen darf.</dd>
+        <dd>Die Sammlung hat schon so viele Einträge, wie sie fassen darf.</dd>
         <dt><code>rate_limited</code> · 429</dt>
         <dd>Zu viele Aufrufe; siehe <a href="#grenzen">Grenzen</a>.</dd>
         <dt><code>unavailable</code> · 503</dt>
@@ -365,11 +365,11 @@ Content-Type: application/json
       </p>
       <p>
         Der Body eines Aufrufs darf höchstens 8 KiB groß sein. Die Höchstzahl an
-        Einträgen einer Liste gilt für einen Schlüssel wie für alle anderen.
+        Einträgen einer Sammlung gilt für einen Schlüssel wie für alle anderen.
       </p>
 
       <p class="meta">
-        Maschinenlesbar, als OpenAPI 3.1 (englisch):
+        Maschinenlesbar, als OpenAPI 3.0 (englisch):
         <a href="../../api/openapi.yaml">openapi.yaml</a>.
       </p>
     </main>

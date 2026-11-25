@@ -48,9 +48,11 @@
       <p>
         In der App: Sammlung öffnen → ⋮ → „Verwalten“ → „API-Schlüssel“. Anlegen
         können ihn Admins und Besitzer:in der Sammlung, wenn ihr Konto eine
-        E-Mail-Adresse hat. Ein anonymes Konto wird nach zwei stillen Jahren
-        gelöscht, und die Aufrufe eines Schlüssels halten es nicht am Leben.
-        Eine Sammlung hat höchstens zehn gültige Schlüssel.
+        E-Mail-Adresse hat; vorher fragt die App nach der Entsperrung des Geräts
+        (Fingerabdruck, Gesicht oder Gerätecode). Ein anonymes Konto wird nach
+        zwei stillen Jahren gelöscht, und die Aufrufe eines Schlüssels halten es
+        nicht am Leben. Eine Sammlung hat höchstens zehn gültige Schlüssel
+        zugleich, und an einem Tag entstehen höchstens zwanzig.
       </p>
       <p>
         Der Schlüssel beginnt mit <code>dct_</code> und wird
@@ -81,6 +83,10 @@
           <strong>Beim ersten Verdacht sperren.</strong> In der App, auf der
           Seite des Schlüssels; das wirkt sofort. Alle Admins und Besitzer:in
           können das, egal wer ihn angelegt hat.
+        </li>
+        <li>
+          <strong>Ohne Lücke ersetzen.</strong> Neuen Schlüssel anlegen, in der
+          Automation austauschen, dann den alten sperren.
         </li>
         <li>
           <strong>Nur im Header, nie in einer URL.</strong> Adressen landen in
@@ -244,10 +250,16 @@ Content-Type: application/json
         </li>
         <li>
           <strong>Ein ausgeblendeter Treffer</strong> bleibt ausgeblendet, ob
-          bis zu einem späteren Tag oder ohne Enddatum; der Aufruf wird mit
-          <code>item_hidden</code> abgelehnt.
+          bis zu einem späteren Tag oder ohne Enddatum.
         </li>
       </ul>
+      <p>
+        Ein Tag außerhalb des eigenen Zeitraums eines Treffers wird nicht
+        gesetzt. Abgelehnt wird in keinem der beiden Fälle: Die Antwort ist der
+        gewohnte Erfolg, damit ein Schlüssel in falschen Händen nicht erfährt,
+        was in der Sammlung steht. Was geschehen ist, zeigt die Seite des
+        Schlüssels in der App.
+      </p>
 
       <h2 id="antwort">Die Antwort</h2>
       <p>Jeder Erfolg antwortet gleich, egal was geschehen ist:</p>
@@ -308,8 +320,10 @@ Content-Type: application/json
         <dd>
           Der Body ist größer als 8 KiB; siehe <a href="#grenzen">Grenzen</a>.
         </dd>
+        <dt><code>invalid_json</code> · 400</dt>
+        <dd>Der Body ist kein JSON oder nicht UTF-8.</dd>
         <dt><code>invalid_body</code> · 422</dt>
-        <dd>Der Body ist kein JSON-Objekt.</dd>
+        <dd>Der Body ist JSON, aber kein Objekt.</dd>
         <dt><code>unknown_field</code> · 422</dt>
         <dd>Ein Feld, das die API nicht kennt; <code>field</code> nennt es.</dd>
         <dt><code>invalid_title</code> · 422</dt>
@@ -326,27 +340,43 @@ Content-Type: application/json
         <dd>Weder <code>true</code> noch <code>false</code>.</dd>
         <dt><code>day_in_past</code> · 422</dt>
         <dd>Der Tag liegt vor heute.</dd>
-        <dt><code>day_outside_frame</code> · 422</dt>
-        <dd>Der Tag liegt außerhalb des Zeitraums, den der Eintrag hat.</dd>
         <dt><code>field_not_on_this_list</code> · 422</dt>
         <dd>
           Diese Art Sammlung hat das Feld nicht, etwa eine Menge außerhalb einer
           Einkaufsliste.
         </dd>
-        <dt><code>item_hidden</code> · 409</dt>
-        <dd>
-          Der passende Eintrag ist ausgeblendet; siehe
-          <a href="#treffer">Wenn es den Eintrag schon gibt</a>.
-        </dd>
         <dt><code>too_many_items</code> · 409</dt>
         <dd>Die Sammlung hat schon so viele Einträge, wie sie fassen darf.</dd>
         <dt><code>rate_limited</code> · 429</dt>
         <dd>Zu viele Aufrufe; siehe <a href="#grenzen">Grenzen</a>.</dd>
+        <dt><code>busy</code> · 429</dt>
+        <dd>
+          Der Schlüssel ist gerade mit einem anderen Aufruf beschäftigt; nach
+          <code>Retry-After</code> noch einmal versuchen, meist nach einer
+          Sekunde.
+        </dd>
         <dt><code>unavailable</code> · 503</dt>
         <dd>
           Decito ist gerade nicht erreichbar; später noch einmal versuchen.
         </dd>
       </dl>
+      <p>
+        Ein <code>429</code> oder <code>503</code> versuchst du nach so vielen
+        Sekunden erneut, wie der Header <code>Retry-After</code> nennt. Jedes
+        andere <code>4xx</code> antwortet gleich, bis sich der Aufruf oder der
+        Schlüssel ändert; ein neuer Versuch hilft dort nicht.
+      </p>
+      <p>
+        Antworten können Felder dazubekommen, und neue Fehlercodes können
+        auftauchen: Entscheide nach dem HTTP-Status, und lies einen
+        <code>error</code>, den du nicht kennst, nach seinem Status.
+      </p>
+      <p>
+        Jede Antwort trägt einen Header <code>X-Request-Id</code>; nenne ihn,
+        wenn du einen fehlgeschlagenen Aufruf meldest. Ein
+        <code>401</code> trägt außerdem <code>WWW-Authenticate</code>, wie HTTP
+        es verlangt.
+      </p>
 
       <h2 id="grenzen">Grenzen</h2>
       <p>Jeder Schlüssel darf höchstens:</p>
@@ -358,10 +388,10 @@ Content-Type: application/json
       </ul>
       <p>
         Jeder Aufruf zählt, auch ein abgelehnter. Nur ein Aufruf, der selbst mit
-        <code>429</code> und <code>rate_limited</code> beantwortet wird, zählt
-        nicht. Der Header <code>Retry-After</code> und das Feld
-        <code>retry_after</code> nennen die Länge des überschrittenen Fensters
-        in Sekunden: So lange solltest du warten.
+        <code>429</code> beantwortet wird, zählt nicht. Der Header
+        <code>Retry-After</code> und das Feld <code>retry_after</code> nennen
+        die Sekunden, bis ein Aufruf wieder gelingen kann: So lange solltest du
+        warten.
       </p>
       <p>
         Der Body eines Aufrufs darf höchstens 8 KiB groß sein. Die Höchstzahl an

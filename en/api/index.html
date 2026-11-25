@@ -51,9 +51,11 @@
           lang="de"
           >„Verwalten“ → „API-Schlüssel“</span
         >). Admins and the Owner of the collection can make one if their account
-        has an e-mail address. An anonymous account is let go after two silent
-        years, and a key’s calls do not keep it alive. A collection holds at
-        most ten valid keys.
+        has an e-mail address; the app first asks for the device’s own unlock
+        (fingerprint, face or device code). An anonymous account is let go after
+        two silent years, and a key’s calls do not keep it alive. A collection
+        holds at most ten valid keys at once, and at most twenty are made in a
+        day.
       </p>
       <p>
         The key starts with <code>dct_</code> and is shown
@@ -83,6 +85,10 @@
           <strong>Revoke at the first suspicion.</strong> In the app, on the
           key’s page; it takes effect at once. Every Admin and the Owner can do
           it, whoever made the key.
+        </li>
+        <li>
+          <strong>Replace without a gap.</strong> Make the new key, swap it into
+          the automation, then revoke the old one.
         </li>
         <li>
           <strong>Only in the header, never in a URL.</strong> Addresses end up
@@ -241,10 +247,14 @@ Content-Type: application/json
         </li>
         <li>
           <strong>A hidden match</strong> stays hidden, whether until a later
-          day or with no end date; the call is refused with
-          <code>item_hidden</code>.
+          day or with no end date.
         </li>
       </ul>
+      <p>
+        A day outside a match’s own span is not set. Neither case is refused:
+        the answer is the usual success, so a leaked key cannot learn what the
+        collection holds. The key’s page in the app shows what happened.
+      </p>
 
       <h2 id="antwort">The answer</h2>
       <p>Every success answers the same, whatever happened:</p>
@@ -296,8 +306,10 @@ Content-Type: application/json
         <dd>
           The body is larger than 8 KiB; see <a href="#grenzen">Limits</a>.
         </dd>
+        <dt><code>invalid_json</code> · 400</dt>
+        <dd>The body is not JSON, or not UTF-8.</dd>
         <dt><code>invalid_body</code> · 422</dt>
-        <dd>The body is not a JSON object.</dd>
+        <dd>The body is JSON, but not an object.</dd>
         <dt><code>unknown_field</code> · 422</dt>
         <dd>A field the API does not know; <code>field</code> names it.</dd>
         <dt><code>invalid_title</code> · 422</dt>
@@ -314,25 +326,39 @@ Content-Type: application/json
         <dd>Neither <code>true</code> nor <code>false</code>.</dd>
         <dt><code>day_in_past</code> · 422</dt>
         <dd>The day is before today.</dd>
-        <dt><code>day_outside_frame</code> · 422</dt>
-        <dd>The day lies outside the span the item has.</dd>
         <dt><code>field_not_on_this_list</code> · 422</dt>
         <dd>
           This kind of collection does not carry the field, such as an amount
           outside a shopping list.
         </dd>
-        <dt><code>item_hidden</code> · 409</dt>
-        <dd>
-          The matching item is hidden; see
-          <a href="#treffer">When the item is already there</a>.
-        </dd>
         <dt><code>too_many_items</code> · 409</dt>
         <dd>The collection already holds as many items as it may.</dd>
         <dt><code>rate_limited</code> · 429</dt>
         <dd>Too many calls; see <a href="#grenzen">Limits</a>.</dd>
+        <dt><code>busy</code> · 429</dt>
+        <dd>
+          The key is busy with another call; try again after
+          <code>Retry-After</code>, usually one second.
+        </dd>
         <dt><code>unavailable</code> · 503</dt>
         <dd>Decito cannot be reached right now; try again later.</dd>
       </dl>
+      <p>
+        Retry a <code>429</code> or <code>503</code> after the seconds the
+        <code>Retry-After</code> header names. Any other <code>4xx</code>
+        answers the same until the call or the key changes, so retrying it does
+        not help.
+      </p>
+      <p>
+        Answers may gain fields, and new error codes may appear: branch on the
+        HTTP status, and read an <code>error</code> you do not know by its
+        status.
+      </p>
+      <p>
+        Every answer carries an <code>X-Request-Id</code> header; name it when
+        you report a failed call. A <code>401</code> also carries
+        <code>WWW-Authenticate</code>, as HTTP asks.
+      </p>
 
       <h2 id="grenzen">Limits</h2>
       <p>Each key may make at most:</p>
@@ -344,10 +370,9 @@ Content-Type: application/json
       </ul>
       <p>
         Every call counts, a refused one too. Only a call that is itself
-        answered with <code>429</code> and <code>rate_limited</code> does not.
-        The <code>Retry-After</code> header and the
-        <code>retry_after</code> field give the length in seconds of the window
-        the key ran over: wait that long.
+        answered with <code>429</code> does not. The
+        <code>Retry-After</code> header and the <code>retry_after</code> field
+        say in how many seconds a call may succeed again: wait that long.
       </p>
       <p>
         A call’s body may be at most 8 KiB. A collection’s cap on items applies

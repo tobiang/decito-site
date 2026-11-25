@@ -12,7 +12,14 @@ info:
 
     A field this API does not know is refused, never ignored. Fields added
     later never change what a call without them does; a change that would
-    break a caller comes as a new address beside this one.
+    break a caller comes as a new address beside this one. Answers may gain
+    fields and new error codes may appear: branch on the HTTP status, and
+    read an `error` you do not know by its status.
+
+    Retry a `429` or `503` after `Retry-After` seconds. Any other `4xx` will
+    answer the same until the call or the key changes, so do not retry it.
+    Every answer carries an `X-Request-Id`; name it when you report a
+    failure.
 
     Design for the key to leak: give each service its own key, and revoke one
     in the app the moment you suspect it.
@@ -37,10 +44,12 @@ paths:
         link or assignee is filled, a different one is left alone. A match
         that was completed comes back as a fresh round: its checklist
         unticked, its old amount gone, a day in the past moved to today. A
-        match hidden until a later day is left hidden.
+        hidden match stays hidden, and a day outside a match's own span is
+        not set.
 
-        Every success answers the same, whatever happened; the app shows
-        what each call did on the key's page.
+        Every success answers the same, whatever happened — the hidden and
+        the out-of-span cases included, so a key cannot learn what the
+        collection holds. The app shows what each call did on the key's page.
       requestBody:
         required: true
         content:
@@ -61,13 +70,29 @@ paths:
                   quantity: 1 Packung
       responses:
         "200":
-          description: The item is in the collection.
+          description: The call was taken; the app's key page says what it did.
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Done"
-        "401":
+        "400":
           $ref: "#/components/responses/Refused"
+        "401":
+          description: No key, or none that works.
+          headers:
+            WWW-Authenticate:
+              description: "The Bearer scheme, as RFC 6750 asks."
+              schema:
+                type: string
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Refusal"
         "403":
           $ref: "#/components/responses/Refused"
         "404":
@@ -79,6 +104,8 @@ paths:
               schema:
                 type: string
                 enum: [POST]
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
           content:
             application/json:
               schema:
@@ -92,30 +119,44 @@ paths:
         "422":
           $ref: "#/components/responses/Refused"
         "429":
-          description: Too many calls; wait as long as `Retry-After` says.
-          headers:
-            Retry-After:
-              description: |
-                The length in seconds of the window the key ran over: wait
-                that long before calling again.
-              schema:
-                type: integer
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Refusal"
+          $ref: "#/components/responses/Later"
         "503":
-          $ref: "#/components/responses/Refused"
+          $ref: "#/components/responses/Later"
 components:
   securitySchemes:
     apiKey:
       type: http
       scheme: bearer
+      bearerFormat: dct_<public id>_<secret><checksum>
       description: |
         `Authorization: Bearer dct_…`. Never put the key in a URL.
+  headers:
+    RequestId:
+      description: Names this call when you report a failure.
+      schema:
+        type: string
+        format: uuid
   responses:
     Refused:
       description: Nothing was changed; `error` says why.
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Refusal"
+    Later:
+      description: |
+        Not now: too many calls (`rate_limited`), the key busy with another
+        call (`busy`), or the service out of reach (`unavailable`).
+      headers:
+        Retry-After:
+          description: Seconds until a call may succeed.
+          schema:
+            type: integer
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
       content:
         application/json:
           schema:
@@ -162,7 +203,6 @@ components:
           type: boolean
     Done:
       type: object
-      additionalProperties: false
       required: [ok, key_expires_at]
       properties:
         ok:
@@ -189,6 +229,7 @@ components:
             - action_not_granted
             - json_expected
             - body_too_large
+            - invalid_json
             - invalid_body
             - unknown_field
             - invalid_title
@@ -197,15 +238,14 @@ components:
             - invalid_url
             - invalid_assign_to_maker
             - day_in_past
-            - day_outside_frame
             - field_not_on_this_list
-            - item_hidden
             - too_many_items
             - rate_limited
+            - busy
             - unavailable
         field:
           description: The unknown field, with `unknown_field`.
           type: string
         retry_after:
-          description: Seconds to wait, with `rate_limited`.
+          description: Seconds to wait, with `rate_limited`, `busy` and `unavailable`.
           type: integer

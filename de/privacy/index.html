@@ -228,81 +228,72 @@
         <h2 id="danke">Danke</h2>
         <p>
           Bedankst du dich bei einem anderen Mitglied für das, was es an einem
-          Tag in einer geteilten Liste getan hat, speichere ich, wer sich bei
-          wem für welchen Tag in welcher Liste bedankt hat, welchen Eintrag es
-          dabei nennt, und die Stunde, in der du dich bedankt hast. Das Danke
-          wird der anderen Person live zugestellt. Sehen können es nur ihr
-          beide, und jeweils nur, solange man selbst Mitglied der Liste ist;
-          andere Mitglieder erfahren nichts davon.
+          Tag in einer geteilten Liste getan hat, speichere ich dieses Danke:
+          wer sich bei wem für welchen Tag in welcher Liste bedankt, welchen
+          Eintrag es nennt, und die Stunde. Sehen können es nur ihr beide, und
+          jeweils nur, solange man selbst Mitglied der Liste ist; andere
+          Mitglieder erfahren nichts davon.
         </p>
         <p>
-          Damit man sich auch für Arbeit bedanken kann, die man sonst nicht
-          sieht, zeigt die App den anderen Mitgliedern einer geteilten Liste,
-          was jemand dort an einem Tag der letzten Woche getan hat — etwas
-          erledigt, eingeplant, aufgeschrieben oder ergänzt —, als eine Zeile
-          mit „Danke“, nie als Zählung oder Rangliste. Dafür speichere ich
-          außerdem, wer einen Eintrag eingeplant hat und wer einen Eintrag
-          ergänzt hat — ein Foto, einen Link oder einige Worte —, jeweils mit
-          der Stunde, aber nicht, was geändert wurde. Damit auch Einspringen
-          zählt: Übernimmst du einen Eintrag, der einem anderen Mitglied
-          zugeteilt war, speichere ich, wem er vorher zugeteilt war und wann du
-          ihn übernommen hast; und bei jedem erledigten Eintrag, wessen Aufgabe
-          er dabei war. Weil ein Mitglied sagen kann, wer einen Eintrag
-          tatsächlich erledigt hat, speichere ich bei jedem erledigten Eintrag
-          außerdem, wer ihn abgehakt hat; hat es jemand anderes erledigt, zeigt
-          die App beide Namen. Diese Angaben sehen die Mitglieder der Liste.
+          Damit man sich auch für Arbeit bedanken kann, die sonst niemand
+          bemerkt, speichere ich in geteilten Listen außerdem,
+          <strong>wer was mit einem Eintrag getan hat</strong> — etwa ihn
+          eingeplant, ergänzt, übernommen oder erledigt —, wem er dabei
+          zugeteilt war, und die Stunde. Von einer Ergänzung speichere ich nur
+          ihre Art — ein Foto, ein Link oder einige Worte —, nicht, was geändert
+          wurde. Diese Angaben sehen die Mitglieder der Liste: als eine Zeile
+          mit „Danke“ zu dem, was jemand an einem Tag der letzten Woche getan
+          hat, nie als Zählung oder Rangliste, und am Eintrag selbst — etwa wer
+          ihn erledigt hat und, wenn jemand anderes ihn abgehakt hat, auch diese
+          Person.
         </p>
         <p>
-          Nur auf deinem Gerät merkt sich die App dafür, welche Danke du schon
-          gesehen und welche Danke-Zeilen du ausgeblendet hast und wann du die
-          App auf diesem Gerät zuletzt geöffnet hast; diese Angaben verlassen
-          dein Gerät nicht.
+          Nur auf deinem Gerät merkt sich die App dafür, welche Danke und
+          Danke-Zeilen du schon gesehen oder ausgeblendet hast und wann du die
+          App zuletzt geöffnet hast; diese Angaben verlassen dein Gerät nicht.
         </p>
         <p>
-          Rechtsgrundlage: für ein Danke Art. 6 Abs. 1 lit. b DSGVO; für die
-          Zeile und die Angaben, wer einen Eintrag eingeplant, ergänzt,
-          übernommen oder abgehakt hat und wessen Aufgabe er war, Art. 6 Abs. 1
-          lit. f DSGVO —
-          das berechtigte Interesse der Mitglieder einer Liste, auch Arbeit zu
-          sehen und anzuerkennen, die sonst niemand bemerkt.
+          Rechtsgrundlage: für ein Danke Art. 6 Abs. 1 lit. b DSGVO; dafür, wer
+          was mit einem Eintrag getan hat, und für die Zeile Art. 6 Abs. 1 lit.
+          f DSGVO — das berechtigte Interesse der Mitglieder einer Liste, auch
+          Arbeit zu sehen und anzuerkennen, die sonst niemand bemerkt.
         </p>
 
         <h2 id="api">API-Schlüssel</h2>
         <p>
           Ein Admin oder die Besitzer:in einer Liste kann einen API-Schlüssel
           anlegen, mit dem ein Dienst außerhalb der App — etwa Home Assistant —
-          Einträge in diese eine Liste setzt. Dafür speichere ich je Schlüssel
-          die Liste, wer ihn angelegt und wer ihn widerrufen hat, seinen Namen,
-          wann er angelegt wurde, abläuft, widerrufen und zuletzt benutzt wurde,
-          und was er darf. Vom Schlüssel selbst speichere ich nur einen
-          Hashwert; zeigen kann ihn danach niemand mehr, auch ich nicht. Wird
-          das Konto, das ihn angelegt hat, gesperrt, widerrufe ich den
-          Schlüssel.
+          Einträge in diese eine Liste setzt. Ich speichere die Angaben zum
+          Schlüssel — etwa seinen Namen, was er darf, wer ihn wann angelegt oder
+          widerrufen hat, wann er abläuft und wann er zuletzt benutzt wurde —,
+          vom Schlüssel selbst aber nur einen Hashwert; zeigen kann ihn danach
+          niemand mehr, auch ich nicht. Wird das Konto, das ihn angelegt hat,
+          gesperrt, widerrufe ich den Schlüssel.
         </p>
         <p>
-          Was die Aufrufe eines Schlüssels bewirken, protokolliere ich mit
-          Zeitpunkt, Ergebnis und dem betroffenen Eintrag, damit ihr seht, was
-          er getan hat, und damit ein abgeflossener Schlüssel gebremst wird;
-          auch eine Verlängerung steht darin. Dieselbe Ablehnung, binnen einer
-          Minute wiederholt, teilt sich eine Zeile mit einer Zählung; die
-          Ablehnungen eines widerrufenen oder abgelaufenen Schlüssels stehen nur
-          einmal darin; ein Aufruf mit unbekanntem Schlüssel oder einer, der
-          schon als fehlerhaft abgewiesen wird, gar nicht. Das Protokoll enthält
-          keine IP-Adresse und keine Programmkennung; Supabase erfasst sie wie
-          bei jeder Verbindung in seinen Zugriffsprotokollen (siehe
-          <a href="#konto">Konto und Anmeldung</a>). Den Namen eines Schlüssels,
-          wer ihn wann angelegt hat und ob er noch wirkt, sehen alle Mitglieder
-          der Liste; Ablauf, letzte Nutzung und Protokoll nur Admins und die
-          Besitzer:in, weil das verrät, wann jemand zu Hause ist. Wann ein
-          Eintrag entstanden ist, den ein Schlüssel gesetzt hat, sehen aber alle
-          Mitglieder, wie bei jedem Eintrag — so viel davon, wann ein Schlüssel
-          benutzt wurde, ist für alle sichtbar. Was ein Schlüssel einträgt,
-          gehört keinem Mitglied: Niemand bekommt dazu eine Mitteilung.
+          Was die Aufrufe eines Schlüssels bewirken, protokolliere ich —
+          Zeitpunkt, Ergebnis, betroffener Eintrag —, damit ihr seht, was er
+          getan hat, und damit ein abgeflossener Schlüssel gebremst wird.
+          Wiederholte Ablehnungen fasse ich zusammen; einen Aufruf mit
+          unbekanntem Schlüssel protokolliere ich gar nicht. Das Protokoll
+          enthält keine IP-Adresse und keine Programmkennung; Supabase erfasst
+          sie wie bei jeder Verbindung in seinen Zugriffsprotokollen (siehe
+          <a href="#konto">Konto und Anmeldung</a>).
+        </p>
+        <p>
+          Dass es einen Schlüssel gibt, wie er heißt, wer ihn angelegt hat und
+          ob er noch wirkt, sehen alle Mitglieder der Liste. Wann er benutzt
+          wurde, abläuft und was er getan hat, sehen nur Admins und die
+          Besitzer:in, weil das verrät, wann jemand zu Hause ist — außer, wann
+          ein Eintrag entstanden ist, den er gesetzt hat: Das sehen wie bei
+          jedem Eintrag alle. Was ein Schlüssel einträgt, gehört keinem
+          Mitglied: Niemand bekommt dazu eine Mitteilung.
         </p>
         <p>
           Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO; für das Protokoll Art. 6
-          Abs. 1 lit. f DSGVO — das berechtigte Interesse der Liste, einen
-          missbrauchten Schlüssel zu erkennen und zu begrenzen.
+          Abs. 1 lit. f DSGVO — das berechtigte Interesse der Mitglieder der
+          Liste und mein eigenes, einen missbrauchten Schlüssel zu erkennen und
+          zu begrenzen.
         </p>
 
         <h2 id="tracking">Kein Tracking über Anbieter hinweg</h2>
@@ -440,32 +431,35 @@
           das bleibt auf dem Gerät.
         </p>
         <p>
-          <strong>Push-Mitteilungen</strong> — wenn jemand in einer gemeinsamen
-          Liste eine Abstimmung startet, wenn ihr Ergebnis da ist und wenn
-          jemand anderes für heute etwas einplant, tauscht oder streicht — gibt
-          es nur, wenn du sie auf einem Gerät einschaltest. Dann meldet sich
-          dieses Gerät bei Firebase Cloud Messaging von Google an. Dabei
-          entsteht eine Gerätekennung (die Firebase-Installations-ID), die ich
-          zusammen mit deinem Konto, der Anmeldung, unter der du eingeschaltet
-          hast, und den Mitteilungsarten speichere, die deine App-Version
-          anzeigen kann. Eine Mitteilung enthält
-          <strong>keine Inhalte, nur Kennungen</strong>: welche Liste, welche
-          Abstimmung und, beim Start, wer sie gestartet hat, als zufällige IDs,
-          nie als Namen oder Text — auch ein Ergebnis nennt keine Option. Den
-          Text schreibt dein Gerät selbst aus dem, was es schon weiß. Die eine
-          Ausnahme sind die Titel dessen, was für heute geplant ist: Sie reisen
-          <strong>versiegelt</strong> mit. Beim Einschalten erzeugt dein Gerät
+          <strong>Push-Mitteilungen</strong> — wenn in einer gemeinsamen Liste
+          etwas geschieht, das dich betrifft, etwa jemand eine Abstimmung
+          startet, ihr Ergebnis da ist oder jemand anderes für heute etwas
+          einplant, tauscht oder streicht — gibt es nur, wenn du sie auf einem
+          Gerät einschaltest. Dann meldet sich dieses Gerät bei Firebase Cloud
+          Messaging von Google an. Dabei entsteht eine Gerätekennung (die
+          Firebase-Installations-ID), die ich zusammen mit deinem Konto, der
+          Anmeldung, unter der du eingeschaltet hast, und den Mitteilungsarten
+          speichere, die deine App-Version anzeigen kann.
+        </p>
+        <p>
+          Eine Mitteilung enthält
+          <strong>keine Inhalte, nur Kennungen</strong> — etwa welche Liste,
+          welche Abstimmung oder welches Mitglied —, als zufällige IDs, nie als
+          Namen oder Text. Den Text schreibt dein Gerät selbst aus dem, was es
+          schon weiß. Braucht eine Mitteilung Text, den dein Gerät noch nicht
+          kennt — etwa die Titel dessen, was für heute geplant ist —, reist er
+          <strong>versiegelt</strong> mit: Beim Einschalten erzeugt dein Gerät
           ein Schlüsselpaar und gibt mir nur den öffentlichen Teil; damit
-          verschlüssele ich die Titel für genau dieses Gerät, und nur sein
-          privater Schlüssel, der das Gerät nie verlässt, kann sie öffnen.
-          Google und Apple befördern sie, lesen können sie sie nicht. Damit ich
-          nur Neues melde, merke ich mir je Liste und Tag, was ich dir zuletzt
-          gemeldet habe, bis zum übernächsten Tag. Startest du eine Abstimmung,
-          geht deine zufällige Kennung in den Mitteilungen an die anderen mit —
-          auch wenn du selbst keine Push-Mitteilungen eingeschaltet hast. Google
+          verschlüssele ich den Text für genau dieses Gerät, und nur sein
+          privater Schlüssel, der das Gerät nie verlässt, kann ihn öffnen.
+          Google und Apple befördern ihn, lesen können sie ihn nicht.
+          Mitteilungen an andere nennen dich höchstens mit deiner zufälligen
+          Kennung — auch wenn du selbst keine Push-Mitteilungen eingeschaltet
+          hast. Damit ich nichts doppelt melde und eine überholte Mitteilung
+          zurücknehmen kann, merke ich mir, was ich dir gemeldet habe. Google
           und — auf einem iPhone, wohin Google die Mitteilung über Apple
-          zustellt — Apple sehen dabei, welches Gerät wann eine Mitteilung
-          erhält, und dessen IP-Adresse.
+          zustellt — Apple sehen, welches Gerät wann eine Mitteilung erhält, und
+          dessen IP-Adresse.
         </p>
         <p>
           Bevor du einschaltest, spricht die App mit keinem dieser Dienste. Du
@@ -630,10 +624,10 @@
           Mit einem Eintrag werden gespeichert: dein Text, bei einem
           Fehlerbericht die Fehlermeldung und der technische Ablaufnachweis
           (Stack-Trace) samt der zuletzt geöffneten Stelle in der App, dazu
-          App-Version, Art des Builds, Installationsquelle (etwa Google Play),
-          Prozessorarchitektur, Zeitzone, Betriebssystem-Version,
-          Spracheinstellung, Gerätemodell und der Stand der
-          Benachrichtigungsberechtigung — sowie deine Kontokennung.
+          technische Angaben zu App und Gerät — etwa App-Version und Art des
+          Builds, Installationsquelle, Betriebssystem, Gerätemodell, Sprache,
+          Zeitzone und ob Mitteilungen erlaubt sind, aber keine Gerätekennung —
+          sowie deine Kontokennung.
         </p>
         <p>
           Deine Einträge siehst du in der App wieder, samt einer etwaigen
@@ -667,42 +661,34 @@
         </p>
         <ul>
           <li>
-            Konto mit E-Mail-Adresse und dessen Inhalte: bis du das Konto
-            löschst.
+            Konto, Inhalte und wie du die App benutzt: bis du das Konto löschst;
+            ein Konto ohne E-Mail-Adresse spätestens zwei Jahre nach der letzten
+            Nutzung. Was du in geteilte Listen eingetragen hast, bleibt nach der
+            Löschung deines Kontos in der Liste, ohne deinen Namen.
+          </li>
+          <li>Ein Danke: 30 Tage, mit deinem Konto sofort.</li>
+          <li>
+            Wer was mit einem Eintrag getan hat: was die Arbeit der letzten
+            Woche zeigt — etwa wer einen Eintrag ergänzt hat, wessen Aufgabe er
+            beim Erledigen war und wer ihn abgehakt hat —, acht Tage; was den
+            Stand eines Eintrags beschreibt — etwa wer ihn eingeplant hat oder
+            wem er vor einer Übernahme zugeteilt war —, solange dieser Stand
+            gilt; wer ihn erledigt hat, so lange wie der Vermerk, wann er
+            erledigt wurde. Mit deinem Konto verlieren diese Angaben den Bezug
+            zu dir.
           </li>
           <li>
-            Konto ohne E-Mail-Adresse und dessen Inhalte: bis du es löschst,
-            spätestens zwei Jahre nach der letzten Nutzung.
-          </li>
-          <li>
-            Inhalte in geteilten Listen: Was du dort eingetragen hast, bleibt
-            nach der Löschung deines Kontos in der Liste, ohne deinen Namen.
-          </li>
-          <li>Meldungen über Inhalte: drei Jahre ab Eingang.</li>
-          <li>
-            Aufrufprotokoll eines API-Schlüssels: 90 Tage. Die Angaben zum
-            Schlüssel bleiben, solange die Liste besteht; widerrufen werden sie
-            nach 90 Tagen gelöscht, wenn kein Eintrag ihn mehr nennt.
+            API-Schlüssel: die Angaben zum Schlüssel, solange die Liste besteht;
+            ein widerrufener wird nach 90 Tagen gelöscht, sobald kein Eintrag
+            ihn mehr nennt. Sein Aufrufprotokoll: 90 Tage.
           </li>
           <li>
             Feedback und Fehlerberichte: bis du den Eintrag löschst, spätestens
             mit der Löschung deines Kontos.
           </li>
-          <li>Moderationsprotokoll: drei Jahre ab der Maßnahme.</li>
-          <li>Ein Danke: 30 Tage, mit deinem Konto sofort.</li>
           <li>
-            Wer einen Eintrag ergänzt hat: acht Tage, mit deinem Konto sofort.
-          </li>
-          <li>
-            Wer einen Eintrag eingeplant hat: solange der Eintrag einen Tag hat,
-            auch nachdem er erledigt ist; mit deinem Konto verliert er den Bezug
-            zu dir.
-          </li>
-          <li>
-            Wem ein übernommener Eintrag vorher zugeteilt war: bis er neu
-            zugeteilt wird; wessen Aufgabe er beim Erledigen war und wer ihn
-            abgehakt hat: acht Tage. Mit deinem Konto verlieren diese Angaben den
-            Bezug zu dir.
+            Meldungen über Inhalte: drei Jahre ab Eingang; das
+            Moderationsprotokoll drei Jahre ab der Maßnahme.
           </li>
           <li>
             Lokale Daten auf dem Gerät: bis zur Deinstallation oder bis du den
@@ -725,9 +711,10 @@
             Tage.
           </li>
           <li>
-            Push-Mitteilungen an dich: bis sie zugestellt sind; dass dir eine
-            Abstimmung gemeldet wurde, solange sie läuft, damit die Mitteilung
-            danach zurückgenommen werden kann — sonst längstens 30 Tage.
+            Was ich zu Push-Mitteilungen an dich speichere: solange es zum
+            Zustellen, Zurücknehmen oder Nicht-Wiederholen gebraucht wird — dass
+            dir eine Abstimmung gemeldet wurde, solange sie läuft —, sonst
+            längstens 30 Tage.
           </li>
           <li>
             E-Mails an mich: bis zum Ende des dritten Jahres nach dem Jahr, in
@@ -753,11 +740,12 @@
           planen damit weiter (Art. 6 Abs. 1 lit. f DSGVO). Dasselbe gilt für
           dort bereits geführte Erledigt-, Plan- und Abstimmungsdaten. Zeigt ein
           Foto oder Text dich selbst und soll verschwinden, lösch es vorher oder
-          schreib mir; dann lösche ich es. Danke, die du gegeben oder bekommen
-          hast, die Angaben, welche Einträge du ergänzt hast, und dein Fazit zu
-          Einträgen (Sterne und Anmerkung) werden gelöscht, auch in Listen
-          anderer. API-Schlüssel, die du angelegt hast, werden ungültig; ihr
-          Name und was sie eingetragen haben bleiben in der Liste.
+          schreib mir; dann lösche ich es. Was die anderen zum Weiterplanen
+          nicht brauchen — etwa Danke, die du gegeben oder bekommen hast, die
+          Angaben, welche Einträge du ergänzt hast, und dein Fazit zu Einträgen
+          (Sterne und Anmerkung) —, wird gelöscht, auch in Listen anderer.
+          API-Schlüssel, die du angelegt hast, werden ungültig; ihr Name und was
+          sie eingetragen haben bleiben in der Liste.
         </p>
         <p>
           Ein Konto ohne E-Mail-Adresse wird auch gelöscht, wenn du dich von ihm
@@ -846,8 +834,8 @@
             Mitglieder;
           </li>
           <li>
-            die Zeile „Danke“ und die Angaben, wer einen Eintrag eingeplant,
-            ergänzt, übernommen oder abgehakt hat und wessen Aufgabe er war;
+            die Zeile „Danke“ und die Angaben, wer was mit einem Eintrag getan
+            hat;
           </li>
           <li>
             das Aufbewahren deines Kontos, wenn du geänderten
@@ -860,7 +848,9 @@
         </ul>
         <p>
           Ein formloser Satz per E-Mail an
-          <a href="mailto:hello@splash.green">hello@splash.green</a> genügt.
+          <a href="mailto:hello@splash.green">hello@splash.green</a> genügt. Wie
+          ich ein berechtigtes Interesse gegen deines abgewogen habe, erkläre
+          ich dir dort auf Anfrage.
         </p>
         <p>
           Nutzt du Decito <strong>ohne E-Mail-Adresse</strong>, kann ich dich
@@ -882,6 +872,14 @@
           Ändert sich, welche Daten die App verarbeitet, wird diese Erklärung
           gemeinsam mit der Änderung angepasst. Das Datum oben nennt den
           aktuellen Stand.
+        </p>
+        <p>
+          Ändert sich etwas Wesentliches — etwa ein neuer Zweck, eine neue Art
+          von Empfängern, eine Übermittlung in ein Drittland oder wie du deine
+          Rechte wahrnimmst —, kündige ich es in der App an, bevor es gilt, mit
+          dem Tag, ab dem es gilt. Zustimmen musst du dafür nichts;
+          widersprechen kannst du wie unter
+          <a href="#rechte">Deine Rechte</a> beschrieben.
         </p>
       </div>
     </main>

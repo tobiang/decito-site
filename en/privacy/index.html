@@ -226,65 +226,58 @@
         <h2 id="danke">Thanks</h2>
         <p>
           When you thank another member for what they did in a shared list on a
-          given day, I store who thanked whom, for which day in which list,
-          which entry it names, and the hour you gave it. The thank-you is
-          delivered to the other person live. Only the two of you can see it,
-          each of you only while you are yourself a member of the list; other
-          members learn nothing about it.
+          given day, I store that thank-you: who thanks whom, for which day in
+          which list, which entry it names, and the hour. Only the two of you
+          can see it, each of you only while you are yourself a member of the
+          list; other members learn nothing about it.
         </p>
         <p>
-          So that work which would otherwise go unseen can be thanked too, the
-          app shows the other members of a shared list what someone did there on
-          a day in the past week — completed, planned, wrote down or filled in —
-          as one line with a “Thanks”, never as a count or a ranking. For this,
-          I also store who planned an entry and who filled an entry in — a
-          photo, a link or a few words —, each with the hour, but not what was
-          changed. So that covering for someone counts too: if you take over an
-          entry that was assigned to another member, I store whom it was
-          assigned to before and when you took it over; and for each completed
-          entry, whose task it was at the time. Because a member can say who
-          actually did an entry, I also store for each completed entry who
-          ticked it off; if someone else did it, the app shows both names.
-          Members of the list can see this.
+          So that work which would otherwise go unnoticed can be thanked too, I
+          also store, in shared lists,
+          <strong>who did what with an entry</strong> — such as planned, filled
+          in, took over or completed it —, whom it was assigned to at the time,
+          and the hour. Of a fill-in I store only its kind — a photo, a link or
+          a few words —, not what was changed. Members of the list see this: as
+          one line with a “Thanks” for what someone did on a day in the past
+          week, never as a count or a ranking, and on the entry itself — such as
+          who completed it and, if someone else ticked it off, that person too.
         </p>
         <p>
-          Only on your device, the app keeps for this which thank-yous you have
-          already seen, which thanks lines you hid and when you last opened the
-          app on this device; this information does not leave your device.
+          Only on your device, the app keeps for this which thank-yous and
+          thanks lines you have already seen or hidden and when you last opened
+          the app; this information does not leave your device.
         </p>
         <p>
-          Legal basis: for a thank-you, Art. 6(1)(b) GDPR; for the line and for
-          who planned, filled in, took over or ticked off an entry and whose
-          task it was,
-          Art. 6(1)(f) GDPR — the members’ legitimate interest in seeing and
-          acknowledging work that would otherwise go unnoticed.
+          Legal basis: for a thank-you, Art. 6(1)(b) GDPR; for who did what with
+          an entry and for the line, Art. 6(1)(f) GDPR — the members’ legitimate
+          interest in seeing and acknowledging work that would otherwise go
+          unnoticed.
         </p>
 
         <h2 id="api">API keys</h2>
         <p>
           An Admin or the owner of a list can make an API key, with which a
           service outside the app — Home Assistant, say — adds items to that one
-          list. For each key I store the list, who made it and who revoked it,
-          its name, when it was made, expires, was revoked and was last used,
-          and what it may do. Of the key itself I store only a hash; no one can
-          show it again afterwards, me included. If the account that made it is
-          suspended, I revoke the key.
+          list. I store the key's details — such as its name, what it may do,
+          who made or revoked it and when, when it expires and when it was last
+          used —, but of the key itself only a hash; no one can show it again
+          afterwards, me included. If the account that made it is suspended, I
+          revoke the key.
         </p>
         <p>
-          I log what a key's calls do, with the time, the outcome and the item
-          touched, so you can see what it did and so that a leaked key is slowed
-          down; extending a key is logged too. The same refusal repeated within
-          a minute shares one line with a count, a revoked or expired key's
-          refusals are logged once, and a call with an unknown key, or one
-          turned away as malformed, is not logged at all. The log holds no IP
-          address and no program identifier; Supabase records them, as for any
-          connection, in its access logs (see
-          <a href="#konto">Account and sign-in</a>). Every member of the list
-          sees a key's name, who made it, when, and whether it still works; its
-          expiry, last use and log only Admins and the owner see, because that
-          tells when someone is at home. Every member does see when an item a
-          key added was created, as for any item, so that much of when a key was
-          used is visible to all. What a key adds belongs to no member: nobody
+          I log what a key's calls do — the time, the outcome, the item touched
+          —, so you can see what it did and so that a leaked key is slowed down.
+          Repeated refusals are summarised; a call with an unknown key is not
+          logged at all. The log holds no IP address and no program identifier;
+          Supabase records them, as for any connection, in its access logs (see
+          <a href="#konto">Account and sign-in</a>).
+        </p>
+        <p>
+          Every member of the list sees that a key exists, its name, who made it
+          and whether it still works. When it was used, when it expires and what
+          it did only Admins and the owner see, because that tells when someone
+          is at home — except when an item it added was created: as for any
+          item, everyone sees that. What a key adds belongs to no member: nobody
           is notified of it.
         </p>
         <p>
@@ -423,29 +416,31 @@
           stays on the device.
         </p>
         <p>
-          <strong>Push notifications</strong> — when someone starts a poll in a
-          shared list, when its result is in, and when someone else plans, swaps
-          or drops something for today — exist only if you turn them on for a
-          device. That device then registers with Google’s Firebase Cloud
-          Messaging, which creates a device identifier (the Firebase
-          installation ID) that I store together with your account, the sign-in
-          under which you switched them on and the kinds of notification your
-          version of the app can show. A notification carries
-          <strong>no content, only identifiers</strong>: which list, which poll
-          and, for a start, who started it, as random IDs, never as names or
-          text — a result names no option either. Your device writes the text
-          itself from what it already knows. The one exception is the titles of
-          what is planned for today: they travel <strong>sealed</strong>. When
-          you switch push on, your device creates a key pair and gives me only
-          the public half; I encrypt the titles for exactly that device, and
-          only its private key, which never leaves the device, can open them.
-          Google and Apple carry them but cannot read them. So that I only tell
-          you what is new, I keep, per list and day, what I last told you, until
-          the day after next. If you start a poll, your random identifier
-          travels in the others’ notifications — even if you have not turned
-          push notifications on yourself. Google and — on an iPhone, where
-          Google delivers the notification through Apple — Apple see which
-          device receives a notification when, and its IP address.
+          <strong>Push notifications</strong> — when something that concerns you
+          happens in a shared list, such as someone starting a poll, its result
+          being in, or someone else planning, swapping or dropping something for
+          today — exist only if you turn them on for a device. That device then
+          registers with Google’s Firebase Cloud Messaging, which creates a
+          device identifier (the Firebase installation ID) that I store together
+          with your account, the sign-in under which you switched them on and
+          the kinds of notification your version of the app can show.
+        </p>
+        <p>
+          A notification carries <strong>no content, only identifiers</strong> —
+          such as which list, which poll or which member —, as random IDs, never
+          as names or text. Your device writes the text itself from what it
+          already knows. Where a notification needs text your device does not
+          know yet — such as the titles of what is planned for today —, it
+          travels <strong>sealed</strong>: when you switch push on, your device
+          creates a key pair and gives me only the public half; I encrypt the
+          text for exactly that device, and only its private key, which never
+          leaves the device, can open it. Google and Apple carry it but cannot
+          read it. Notifications to others name you at most by your random
+          identifier — even if you have not turned push notifications on
+          yourself. So that I tell you nothing twice and can take back an
+          outdated notification, I keep what I have told you. Google and — on an
+          iPhone, where Google delivers the notification through Apple — Apple
+          see which device receives a notification when, and its IP address.
         </p>
         <p>
           Before you switch them on, the app talks to none of these services.
@@ -604,11 +599,11 @@
         <p>
           With an entry, the following is stored: your text; for an error
           report, the error message and the technical trace (stack trace)
-          together with the place in the app last opened; in addition, the app
-          version, build type, install source (such as Google Play), processor
-          architecture, time zone, operating system version, language setting,
-          device model and the status of the notification permission — as well
-          as your account ID.
+          together with the place in the app last opened; in addition, technical
+          details of the app and device — such as the app version and build
+          type, install source, operating system, device model, language, time
+          zone and whether notifications are allowed, but no device identifier —
+          as well as your account ID.
         </p>
         <p>
           You can see your entries again in the app, together with any response
@@ -639,43 +634,33 @@
         </p>
         <ul>
           <li>
-            Account with an email address and its content: until you delete the
-            account.
-          </li>
-          <li>
-            Account without an email address and its content: until you delete
-            it, at the latest two years after last use.
-          </li>
-          <li>
-            Content in shared lists: what you added there stays in the list
+            Account, content and how you use the app: until you delete the
+            account; an account without an email address at the latest two years
+            after last use. What you added to shared lists stays in the list
             after your account is deleted, without your name.
           </li>
-          <li>Reports about content: three years from receipt.</li>
+          <li>A thank-you: 30 days, and immediately with your account.</li>
           <li>
-            An API key's call log: 90 days. A key's details stay as long as the
-            list does; once revoked, they are deleted after 90 days if no item
-            names the key.
+            Who did what with an entry: what shows the past week’s work — such
+            as who filled an entry in, whose task it was when completed and who
+            ticked it off —, eight days; what describes an entry’s current state
+            — such as who planned it or whom it was assigned to before a
+            takeover —, for as long as that state holds; who completed it, as
+            long as the record of when it was completed. When your account is
+            deleted, this information loses its link to you.
+          </li>
+          <li>
+            API keys: a key’s details as long as the list exists; a revoked key
+            is deleted after 90 days once no item names it. Its call log: 90
+            days.
           </li>
           <li>
             Feedback and error reports: until you delete the entry, at the
             latest when your account is deleted.
           </li>
-          <li>Moderation log: three years from the measure.</li>
-          <li>A thank-you: 30 days, and immediately with your account.</li>
           <li>
-            Who filled an entry in: eight days, and immediately with your
-            account.
-          </li>
-          <li>
-            Who planned an entry: as long as the entry has a day, even after it
-            is done; when your account is deleted, the entry loses its link to
-            you.
-          </li>
-          <li>
-            Whom a taken-over entry was assigned to before: until it is assigned
-            anew; whose task it was when completed and who ticked it off: eight
-            days. When your account is deleted, this information loses its link
-            to you.
+            Reports about content: three years from receipt; the moderation log
+            three years from the measure.
           </li>
           <li>
             Local data on the device: until uninstallation or until you clear
@@ -691,9 +676,10 @@
             unregisters it there, then, Google says, at most 180 days.
           </li>
           <li>
-            Push notifications to you: until delivered; that a poll was
-            announced to you, for as long as it runs, so the notification can be
-            taken back afterwards — otherwise at most 30 days.
+            What I store about push notifications to you: for as long as it is
+            needed to deliver, take back or not repeat them — that a poll was
+            announced to you, for as long as it runs —, otherwise at most 30
+            days.
           </li>
           <li>
             Access logs at Supabase: seven days. Sign-in log: seven days, also
@@ -724,11 +710,11 @@
           members keep planning with it (Art. 6(1)(f) GDPR). The same applies to
           completion, planning and poll data already recorded there. If a photo
           or text shows you yourself and should go, delete it beforehand or
-          write to me, and I will delete it. Thank-yous you gave or received,
-          the record of which entries you filled in, and your verdicts on
-          entries (stars and remark) are deleted, including in other people’s
-          lists. API keys you made stop working; their name and what they added
-          stay in the list.
+          write to me, and I will delete it. What the others do not need to keep
+          planning — such as thank-yous you gave or received, the record of
+          which entries you filled in, and your verdicts on entries (stars and
+          remark) — is deleted, including in other people’s lists. API keys you
+          made stop working; their name and what they added stay in the list.
         </p>
         <p>
           An account without an email address is also deleted when you use it to
@@ -809,10 +795,7 @@
           <li>the access logs and sign-in sessions at Supabase;</li>
           <li>the call log of API keys;</li>
           <li>retrieving preview images on the other members’ devices;</li>
-          <li>
-            the “Thanks” line and who planned, filled in, took over or ticked
-            off an entry and whose task it was;
-          </li>
+          <li>the “Thanks” line and who did what with an entry;</li>
           <li>
             keeping your account if you do not agree to changed terms of use,
             and your contributions in shared lists after a deletion;
@@ -824,6 +807,8 @@
         <p>
           A short informal email to
           <a href="mailto:hello@splash.green">hello@splash.green</a> is enough.
+          How I weighed a legitimate interest against yours I will explain there
+          on request.
         </p>
         <p>
           If you use Decito <strong>without an email address</strong>, I cannot
@@ -844,6 +829,13 @@
         <p>
           If the data the app processes changes, this policy is updated together
           with the change. The date at the top states which version is current.
+        </p>
+        <p>
+          If something material changes — such as a new purpose, a new kind of
+          recipient, a transfer to a third country or how you exercise your
+          rights —, I announce it in the app before it applies, with the day it
+          applies from. You do not need to agree to anything; you can object as
+          described under <a href="#rechte">Your rights</a>.
         </p>
       </div>
     </main>
